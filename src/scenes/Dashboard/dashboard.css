@@ -1,0 +1,136 @@
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-44 { font-size: 44px; }
+.material-icons.md-48 { font-size: 48px; }
+
+:root {
+	--main-background-color: #272727;
+	--card-background-color: #363636;
+	--main-card-bar-color: darkred;
+	--card-bar-color: red;
+	--card-text-highlight-color: white;
+	--card-text-color: LightGrey;
+	--text-background-highlight: #009499;
+	--text-background: Grey;
+}
+
+body {
+	margin: 0;
+	font-family: 'roboto', sans-serif;
+	height: 1280px;
+	width: 800px;
+}
+
+.MainBackground {
+	background-color: var(--main-background-color);
+	overflow: auto;
+	height: 1280px;
+	width: 800px;
+}
+
+.MainTopBar {
+	background-color: var(--main-card-bar-color);
+	height: 60px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.CardBoardContainer {
+	padding: 5px;
+	display: flex;
+}
+
+.CardContainer {
+	width: 50%;
+	margin: 5px;
+	background-color: var(--card-background-color);
+}
+
+.CardBar {
+	background-color: var(--card-bar-color);
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.CardBarTitle {
+	margin-left:  20px;
+	margin-right: 20px;
+	font-weight: bold;
+	font-size: 20px;
+	color: var(--card-text-highlight-color);
+}
+
+.CardBarRight {
+	color: var(--card-text-highlight-color);
+	margin-left:  20px;
+	margin-right: 20px;
+}
+
+.CardBody {
+	padding: 7px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.CardItems {
+	width: 93%;
+	margin: 7px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.CardItem {
+	width: 100%;
+	margin: 5px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.GraphBar {
+	align-self: flex-start;
+}
+
+.CardBodyText {
+	font-weight: bold;
+	font-size: 15px;
+	color: var(--card-text-color);
+	text-transform: uppercase;
+}
+
+.CardBodyTextCentered {
+	margin: auto;
+	font-weight: bold;
+	font-size: 15px;
+	color: var(--card-text-color);
+	text-transform: uppercase;
+}
+
+.CardBodyTextHighlight {
+	font-weight: bold;
+	font-size: 22px;
+	color: var(--card-text-highlight-color);
+}
+
+.CardBodyTextHighlightCentered {
+	margin: auto;
+	font-weight: bold;
+	font-size: 22px;
+	color: var(--card-text-highlight-color);
+}
+
+.HorizBarChart {
+	background-color: green;
+}
