@@ -12,6 +12,7 @@ class Dashboard extends Component {
   }
 
   render() {
+  	console.log("dashboard.js")
   	if(this.props.payload) {
 	  	if(this.props.payload.water !== undefined && (this.state.water !== this.props.payload.water)) {
 	  		this.setState((state, props) => ({

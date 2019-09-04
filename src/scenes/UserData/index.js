@@ -75,6 +75,7 @@ class UserData extends Component{
 
 
 	render(){
+		console.log("index.js")
 		return(
 			<Dashboard payload={this.state.msg.payload} /> 
 
