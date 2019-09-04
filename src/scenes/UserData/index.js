@@ -77,7 +77,7 @@ class UserData extends Component{
 
 	render(){
 		return(
-			<Dashboard data={this.state.msg} /> 
+			<Dashboard payload={this.state.msg.payload} /> 
 
 			/*<div ref="root"style={{height:"50vh"}}>
 				<div>{'msg: ' + this.state.msg.payload}</div>

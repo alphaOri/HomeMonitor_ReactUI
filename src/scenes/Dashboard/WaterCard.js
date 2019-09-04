@@ -3,6 +3,7 @@ import './dashboard.css'
 import '../fonts/material-design-icons/iconfont/material-icons.css'
 import HorizBarGraph from './HorizBarGraph'
 import CardHeader from './CardHeader'
+import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 
 class WaterCard extends Component {
   constructor(props) {
@@ -13,29 +14,24 @@ class WaterCard extends Component {
     }
   }
 
-  /*componentDidMount() {
+  componentDidMount() {
   	// request historical data
-  	// update the state
-  }*/
+  	uibuilder.send({'topic':'water','payload':'initialize'})
+  }
 
-  componentWillReceiveProps() {
+  render() {
   	if(this.props.waterData){
-		if(this.props.waterData.usage){
-	    	//this.setState({ usage: this.props.waterData.usage })
+		if(this.props.waterData.usage !== undefined && (this.state.usage !== this.props.waterData.usage)){
 	  		this.setState((state, props) => ({
 			  usage: this.props.waterData.usage
 			}))
 	    }
-	    if(this.props.waterData.flow){
-	    	//this.setState({ flow: this.props.waterData.flow })
+	    else if(this.props.waterData.flow !== undefined && (this.state.flow !== this.props.waterData.flow)){
 			this.setState((state, props) => ({
 			  flow: this.props.waterData.flow
 			}))
 	    }
 	}
-  }
-
-  render() {
 
     return (
 		<div class="CardContainer">

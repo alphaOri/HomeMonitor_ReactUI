@@ -11,17 +11,14 @@ class Dashboard extends Component {
     }
   }
 
-  componentWillReceiveProps() {
-  	if(this.props.data.payload !== undefined) {
-	  	if(this.props.data.payload.water !== undefined) {
+  render() {
+  	if(this.props.payload) {
+	  	if(this.props.payload.water !== undefined && (this.state.water !== this.props.payload.water)) {
 	  		this.setState((state, props) => ({
-			  water: this.props.data.payload.water
+			  water: this.props.payload.water
 			}));
 	  	}
 	}
-  }
-
-  render() {
 
     return (
 		<div ref="root">
