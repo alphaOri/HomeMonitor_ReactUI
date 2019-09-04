@@ -21,21 +21,19 @@ class Dashboard extends Component {
 	}
 
     return (
-		<div ref="root">
-	  		<div class="MainBackground">
-	  			<div class="MainTopBar">
-					<div class="CardBarTitle">
-						Home
-					</div>
-					<div class="CardBarRight">
-						<i class="material-icons md-36">settings</i>
-					</div>
-	    		</div>
-    			<div class="CardBoardContainer">
-					<WaterCard waterData={this.state.water}/>
+  		<div class="MainBackground">
+  			<div class="MainTopBar">
+				<div class="CardBarTitle">
+					Home
 				</div>
-	    	</div>
-		</div>
+				<div class="CardBarRight">
+					<i class="material-icons md-36">settings</i>
+				</div>
+    		</div>
+			<div class="CardBoardContainer">
+				<WaterCard waterData={this.state.water}/>
+			</div>
+    	</div>
 	)
   }
 }
