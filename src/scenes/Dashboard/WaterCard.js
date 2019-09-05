@@ -21,18 +21,46 @@ class WaterCard extends Component {
   	uibuilder.send({'topic':'water','payload':'initialize'})
   }
 
+  shouldComponentUpdate(nextProps){
+  	if(nextProps.water == null){
+  		console.log("WaterCard:shouldComponentUpdate:return false")
+  		return false
+  	}
+  	console.log("WaterCard:shouldComponentUpdate:return true")
+	return true
+  }
+
   render() {
-  	if(this.props.waterData){
-		if(this.props.waterData.usage !== undefined && (this.state.usage !== this.props.waterData.usage)){
+  	console.log("WaterCard.js:render(): ")
+  	console.log(this.props)
+  	/*if(this.props.water){
+		if(this.props.water.usage !== undefined && (this.state.usage !== this.props.water.usage)){
 	  		this.setState((state, props) => ({
-			  usage: this.props.waterData.usage
+			  usage: this.props.water.usage
 			}))
 	    }
-	    else if(this.props.waterData.flow !== undefined && (this.state.flow !== this.props.waterData.flow)){
+	    else if(this.props.water.flow !== undefined && (this.state.flow !== this.props.water.flow)){
 			this.setState((state, props) => ({
-			  flow: this.props.waterData.flow
+			  flow: this.props.water.flow
 			}))
 	    }
+	}*/
+
+	if (this.props.water == null) {
+	    return (
+			<div class="CardContainer">
+				<CardHeader title="Water"/>
+				<div class="CardBody">
+					<div class="CardItems" style={{width: "75%"}}>
+						<div class="CardItem">
+							<div class="CardBodyTextCentered">
+								No Data...
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	    ) 
 	}
 
     return (
@@ -44,13 +72,13 @@ class WaterCard extends Component {
 						<div class="CardBodyTextCentered">
 							usage till now
 						</div>
-						<DisplayValue value={this.state.usage} units={"gallons"}/>
+						<DisplayValue value={this.props.water.usage} units={"gallons"}/>
 					</div>
 					<div class="CardItem">
 						<div class="CardBodyTextCentered">
 							current usage
 						</div>
-						<DisplayValue value={this.state.flow} units={"gal/min"}/>
+						<DisplayValue value={this.props.water.flow} units={"gal/min"}/>
 					</div>
 				</div>
 			</div>

@@ -10,6 +10,7 @@ class HorizBarGraph extends Component {
   }
 
   render() {
+  	console.log("HorizBarGraph.js:render(): " + this.props)
   	var {today, yesterday, average} = this.props
   	var max = Math.max(today, yesterday, average)
     return (
