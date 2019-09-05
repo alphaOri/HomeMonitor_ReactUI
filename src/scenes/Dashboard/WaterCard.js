@@ -50,9 +50,7 @@ class WaterCard extends Component {
 						<div class="CardBodyTextCentered">
 							current usage
 						</div>
-						<div class="CardBodyTextHighlightCentered">
-							{this.state.flow} gal/min
-						</div>
+						<DisplayValue value={this.state.flow} units={"gal/min"}/>
 					</div>
 				</div>
 			</div>
