@@ -4,6 +4,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import HorizBarGraph from './HorizBarGraph'
 import CardHeader from './CardHeader'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
+import DisplayValue from './LittleBits.js'
 
 class WaterCard extends Component {
   constructor(props) {
@@ -43,9 +44,7 @@ class WaterCard extends Component {
 						<div class="CardBodyTextCentered">
 							usage till now
 						</div>
-						<div class="CardBodyTextHighlightCentered">
-							{this.state.usage} gallons
-						</div>
+						<DisplayValue value={this.state.usage} units={"gallons"}/>
 					</div>
 					<div class="CardItem">
 						<div class="CardBodyTextCentered">
