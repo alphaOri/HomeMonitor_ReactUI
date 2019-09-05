@@ -31,40 +31,40 @@ class UserData extends Component{
 		})
 
 
-		uibuilder.onChange('msgsReceived',(newVal) =>{
+		/*uibuilder.onChange('msgsReceived',(newVal) =>{
 			//console.info('New msg sent to us from Node-RED over Socket.IO.TotalCount:',newVal)
 			this.setState({
 			  msgReceived: newVal
 			})
 			this.forceUpdate();
-		})
+		})*/
 
 		//IfSocket.IOconnects/disconnects
-		uibuilder.onChange('ioConnected',(newVal) =>{
+		/*uibuilder.onChange('ioConnected',(newVal) =>{
 			//console.info('Socket.IOConnectionStatusChanged:',newVal)
 			this.setState({
 			  webSocket: newVal
 			})
 			this.forceUpdate();
-		})
+		})*/
 
 		//IfamessageissentbacktoNode-RED
-		uibuilder.onChange('msgsSent',(newVal) =>{
+		/*uibuilder.onChange('msgsSent',(newVal) =>{
 			//console.info('New msg sent to Node-RED over Socket.IO.TotalCount:',newVal)
 			this.setState({
 			  msgSent: newVal
 			})
 			this.forceUpdate();
-		})
+		})*/
 
 		//IfwereceiveacontrolmessagefromNode-RED
-		uibuilder.onChange('msgsCtrl',(newVal) =>{
+		/*uibuilder.onChange('msgsCtrl',(newVal) =>{
 			//console.info('New control msg sent to us from Node-RED over Socket.IO.TotalCount:',newVal)
 			this.setState({
 			  controlMsgReceived: newVal
 			})
 			this.forceUpdate();
-		})
+		})*/
 
 	// 	//Manually send a message back to Node-RED after 2 seconds
 	// 	window.setTimeout(function(){
@@ -75,7 +75,7 @@ class UserData extends Component{
 
 
 	render(){
-		console.log("index.js")
+		//console.log("index.js rendered")
 		return(
 			<Dashboard payload={this.state.msg.payload} /> 
 

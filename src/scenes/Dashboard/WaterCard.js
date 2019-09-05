@@ -15,6 +15,7 @@ class WaterCard extends Component {
   }
 
   componentDidMount() {
+  	//console.log("WaterCard - componentDidMount()")
   	// request historical data
   	uibuilder.send({'topic':'water','payload':'initialize'})
   }
