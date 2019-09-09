@@ -10,8 +10,6 @@ class WaterCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-    	usage: 0,
-    	flow: 0
     }
   }
 
@@ -82,7 +80,7 @@ class WaterCard extends Component {
 					</div>
 				</div>
 			</div>
-			<HorizBarGraph units="gallons" today={80} yesterday={100} average={60}/>
+			<HorizBarGraph units="gallons" totals={this.props.water.totals}/>
 		</div>
     )
   }
