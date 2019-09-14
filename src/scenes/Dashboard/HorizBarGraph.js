@@ -30,9 +30,6 @@ class HorizBarGraph extends Component {
 	    ) 
 	}
 
-  	//var today = (if this.props.totals.today ? this.props.totals.today : undefined)
-  	//var yesterday = (if this.props.totals.yesterday ? this.props.totals.yesterday : undefined)
-  	//var average = (if this.props.totals.average ? this.props.totals.average : undefined)
   	var {today, yesterday, average} = this.props.totals
   	var toMax = Object.values(this.props.totals)
   	var max = Math.max(...toMax)
@@ -74,8 +71,8 @@ class Bar extends Component {
 					<div class="CardBodyText">
 						{this.props.label}
 					</div>
-					<div class="CardBodyTextHighlight">
-						... No data ...
+					<div class="CardBodyText">
+						No data
 					</div>
 				</div>
 			</div>	

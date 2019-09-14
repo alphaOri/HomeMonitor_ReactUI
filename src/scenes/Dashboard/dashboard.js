@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './dashboard.css'
 import '../fonts/material-design-icons/iconfont/material-icons.css'
+import './roboto-font.css'
 import WaterCard from './WaterCard'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 

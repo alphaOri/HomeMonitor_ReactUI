@@ -18,8 +18,6 @@
 body {
 	margin: 0;
 	font-family: 'roboto', sans-serif;
-	height: 1280px;
-	width: 800px;
 }
 
 .MainBackground {
@@ -122,6 +120,7 @@ body {
 	font-weight: bold;
 	font-size: 22px;
 	color: var(--card-text-highlight-color);
+	white-space: nowrap;
 }
 
 .CardBodyTextHighlightCentered {
