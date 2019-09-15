@@ -21,16 +21,16 @@ class Dashboard extends Component {
 
   shouldComponentUpdate(nextProps){
   	if(nextProps.payload == null){
-  		console.log("dashboard:shouldComponentUpdate:return false")
+  		//console.log("dashboard:shouldComponentUpdate:return false")
   		return false;
   	}
-  	console.log("dashboard:shouldComponentUpdate:return true")
+  	//console.log("dashboard:shouldComponentUpdate:return true")
 	return true;
   }
 
   render() {
-  	console.log("dashboard.js:render():")
-  	console.log(this.props)
+  	//console.log("dashboard.js:render():")
+  	//console.log(this.props)
   	/*if(this.props.payload) {
 	  	if(this.props.payload.water !== undefined && (this.state.water !== this.props.payload.water)) {
 	  		this.setState((state, props) => ({

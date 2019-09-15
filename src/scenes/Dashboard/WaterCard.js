@@ -21,16 +21,16 @@ class WaterCard extends Component {
 
   shouldComponentUpdate(nextProps){
   	if(nextProps.water == null){
-  		console.log("WaterCard:shouldComponentUpdate:return false")
+  		//console.log("WaterCard:shouldComponentUpdate:return false")
   		return false
   	}
-  	console.log("WaterCard:shouldComponentUpdate:return true")
+  	//console.log("WaterCard:shouldComponentUpdate:return true")
 	return true
   }
 
   render() {
-  	console.log("WaterCard.js:render(): ")
-  	console.log(this.props)
+  	//console.log("WaterCard.js:render(): ")
+  	//console.log(this.props)
   	/*if(this.props.water){
 		if(this.props.water.usage !== undefined && (this.state.usage !== this.props.water.usage)){
 	  		this.setState((state, props) => ({
@@ -65,7 +65,7 @@ class WaterCard extends Component {
 		<div class="CardContainer">
 			<CardHeader title="Water"/>
 			<div class="CardBody">
-				<div class="CardItems" style={{width: "75%"}}>
+				<div class="CardItems" style={{width: "65%"}}>
 					<div class="CardItem">
 						<div class="CardBodyTextCentered">
 							usage till now
@@ -79,8 +79,8 @@ class WaterCard extends Component {
 						<DisplayValue value={this.props.water.flow} units={"gal/min"}/>
 					</div>
 				</div>
+				<HorizBarGraph units="gallons" totals={this.props.water.totals}/>
 			</div>
-			<HorizBarGraph units="gallons" totals={this.props.water.totals}/>
 		</div>
     )
   }

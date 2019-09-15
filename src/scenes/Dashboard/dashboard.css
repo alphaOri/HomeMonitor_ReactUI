@@ -106,10 +106,11 @@ body {
 	font-size: 15px;
 	color: var(--card-text-color);
 	text-transform: uppercase;
+	white-space: nowrap;
 }
 
 .CardBodyTextCentered {
-	margin: auto;
+	margin-right: auto;
 	font-weight: bold;
 	font-size: 15px;
 	color: var(--card-text-color);
@@ -121,10 +122,16 @@ body {
 	font-size: 22px;
 	color: var(--card-text-highlight-color);
 	white-space: nowrap;
+	margin-left: 10px;
+}
+
+.CardBodyUnits {
+	font-size: 18px;
+	display: inline;
 }
 
 .CardBodyTextHighlightCentered {
-	margin: auto;
+	margin-left: auto;
 	font-weight: bold;
 	font-size: 22px;
 	color: var(--card-text-highlight-color);

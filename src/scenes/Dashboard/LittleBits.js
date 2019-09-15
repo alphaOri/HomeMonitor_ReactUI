@@ -11,28 +11,34 @@ class DisplayValue extends Component {
 
   shouldComponentUpdate(nextProps){
   	if(nextProps.value == null){
-  		console.log("DisplayValue:shouldComponentUpdate:return false")
+  		//console.log("DisplayValue:shouldComponentUpdate:return false")
   		return false;
   	}
-  	console.log("DisplayValue:shouldComponentUpdate:return true")
+  	//console.log("DisplayValue:shouldComponentUpdate:return true")
 	return true;
   }
 
   render() {
-  	console.log("DisplayValue.js:render(): ")
-  	console.log(this.props)
+  	//console.log("DisplayValue.js:render(): ")
+  	//console.log(this.props)
 
   	if(this.props.value === null || this.props.value === undefined){
 		return (
 			<div class="CardBodyTextHighlightCentered">
-				--- {this.props.units}
+				---
+				<div class="CardBodyUnits">
+					{' '}{this.props.units}
+				</div>
 			</div>
 		); 
 	}
 
 	return (
 		<div class="CardBodyTextHighlightCentered">
-			{this.props.value} {this.props.units}
+			{this.props.value}
+			<div class="CardBodyUnits">
+				{' '}{this.props.units}
+			</div>
 		</div>
 	);
   }

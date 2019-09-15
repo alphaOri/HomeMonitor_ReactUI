@@ -11,16 +11,16 @@ class HorizBarGraph extends Component {
 
   shouldComponentUpdate(nextProps){
   	if(nextProps.totals == null){
-  		console.log("HorizBarGraph:shouldComponentUpdate:return false")
+  		//console.log("HorizBarGraph:shouldComponentUpdate:return false")
   		return false
   	}
-  	console.log("HorizBarGraph:shouldComponentUpdate:return true")
+  	//console.log("HorizBarGraph:shouldComponentUpdate:return true")
 	return true
   }
 
   render() {
-  	console.log("HorizBarGraph.js:render(): ")
-  	console.log(this.props)
+  	//console.log("HorizBarGraph.js:render(): ")
+  	//console.log(this.props)
 
   	if (this.props.totals == null) {
 	    return (
@@ -53,16 +53,16 @@ class Bar extends Component {
 
   shouldComponentUpdate(nextProps){
   	if(nextProps.value == null){
-  		console.log("Bar:shouldComponentUpdate:return false")
+  		//console.log("Bar:shouldComponentUpdate:return false")
   		return false
   	}
-  	console.log("Bar:shouldComponentUpdate:return true")
+  	//console.log("Bar:shouldComponentUpdate:return true")
 	return true
   }
 
   render() {
-  	console.log("Bar:render(): " )
-  	console.log(this.props)
+  	//console.log("Bar:render(): " )
+  	//console.log(this.props)
 
   	if (this.props.value == null) {
 	    return (
@@ -92,7 +92,10 @@ class Bar extends Component {
 					{this.props.label}
 				</div>
 				<div class="CardBodyTextHighlight">
-					{this.props.value} {this.props.units}
+					{this.props.value}
+					<div class="CardBodyUnits">
+						{' '}{this.props.units}
+					</div>
 				</div>
 			</div>
 		</div>	

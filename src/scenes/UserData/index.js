@@ -75,7 +75,7 @@ class UserData extends Component{
 
 
 	render(){
-		console.log("index.js:render(): ")
+		//console.log("index.js:render(): ")
 		//console.log(this.props)
 		return(
 			<Dashboard payload={this.state.msg.payload} /> 
