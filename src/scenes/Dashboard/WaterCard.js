@@ -68,7 +68,7 @@ class WaterCard extends Component {
 				<div class="CardItems" style={{width: "65%"}}>
 					<div class="CardItem">
 						<div class="CardBodyTextCentered">
-							usage till now
+							so far today
 						</div>
 						<DisplayValue value={this.props.water.usage} units={"gallons"}/>
 					</div>
