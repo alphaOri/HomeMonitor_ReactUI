@@ -9,8 +9,15 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    	water: null
+    	water: null,
+    	fullscreen: "none"
     }
+  }
+
+  handleFullscreen = (card) => {
+  	this.setState({
+	  fullscreen: card
+	});
   }
 
   componentDidMount() {
@@ -31,20 +38,13 @@ class Dashboard extends Component {
   render() {
   	//console.log("dashboard.js:render():")
   	//console.log(this.props)
-  	/*if(this.props.payload) {
-	  	if(this.props.payload.water !== undefined && (this.state.water !== this.props.payload.water)) {
-	  		this.setState((state, props) => ({
-			  water: this.props.payload.water
-			}));
-	  	}
-	}*/
 
 	if (this.props.payload == null) {
 		return (
 		    <div class="MainBackground">
 	  			<div class="MainTopBar">
 					<div class="CardBarTitle">
-						No connection to Node-Red...
+						Connecting to Node-Red...
 					</div>
 	    		</div>
 				<div class="CardBoardContainer">
@@ -53,21 +53,39 @@ class Dashboard extends Component {
 	    )
 	}
 
-    return (
-  		<div class="MainBackground">
-  			<div class="MainTopBar">
-				<div class="CardBarTitle">
-					Home
+	if(this.state.fullscreen === "none"){
+	    return (
+	  		<div class="MainBackground">
+	  			<div class="MainTopBar">
+					<div class="CardBarTitle">
+						Home
+					</div>
+					<div class="CardBarRight">
+						<i class="material-icons md-36">settings</i>
+					</div>
+	    		</div>
+				<div class="CardBoardContainer">
+					<WaterCard water={this.props.payload.water} 
+					fullscreenClick = {this.handleFullscreen}/>
 				</div>
-				<div class="CardBarRight">
-					<i class="material-icons md-36">settings</i>
+	    	</div>
+		)
+	} else if (this.state.fullscreen === "water"){
+		return (
+			<div class="MainBackground">
+	  			<div class="MainTopBar">
+					<div class="CardBarTitle">
+						Home
+					</div>
+					<div class="CardBarRight">
+						<i class="material-icons md-36">settings</i>
+					</div>
+	    		</div>
+				<div class="CardBoardContainer">
 				</div>
-    		</div>
-			<div class="CardBoardContainer">
-				<WaterCard water={this.props.payload.water}/>
-			</div>
-    	</div>
-	)
+	    	</div>
+	    )
+	}
   }
 }
 

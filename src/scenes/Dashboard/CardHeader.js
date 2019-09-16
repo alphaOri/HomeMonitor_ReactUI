@@ -9,7 +9,7 @@ function CardHeader(props) {
 				{props.title}
 			</div>
 			<div class="CardBarRight">
-				<i class="material-icons md-36">settings_overscan</i>
+				<i class="material-icons md-36" onClick={() => {props.fullscreenClick(props.type)}}>settings_overscan</i>
 			</div>
 		</div>
 	);

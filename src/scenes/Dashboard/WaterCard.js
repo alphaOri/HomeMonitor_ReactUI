@@ -31,18 +31,6 @@ class WaterCard extends Component {
   render() {
   	//console.log("WaterCard.js:render(): ")
   	//console.log(this.props)
-  	/*if(this.props.water){
-		if(this.props.water.usage !== undefined && (this.state.usage !== this.props.water.usage)){
-	  		this.setState((state, props) => ({
-			  usage: this.props.water.usage
-			}))
-	    }
-	    else if(this.props.water.flow !== undefined && (this.state.flow !== this.props.water.flow)){
-			this.setState((state, props) => ({
-			  flow: this.props.water.flow
-			}))
-	    }
-	}*/
 
 	if (this.props.water == null) {
 	    return (
@@ -63,7 +51,8 @@ class WaterCard extends Component {
 
     return (
 		<div class="CardContainer">
-			<CardHeader title="Water"/>
+			<CardHeader title="Water" 
+				fullscreenClick={this.props.fullscreenClick} type="water"/>
 			<div class="CardBody">
 				<div class="CardItems" style={{width: "65%"}}>
 					<div class="CardItem">
@@ -85,6 +74,8 @@ class WaterCard extends Component {
     )
   }
 }
+
+
 
 
 export default WaterCard
