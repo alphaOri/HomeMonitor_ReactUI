@@ -31,13 +31,17 @@ class HorizBarGraph extends Component {
 	}
 
   	var {today, yesterday, average} = this.props.totals
-  	var toMax = Object.values(this.props.totals)
-  	var max = Math.max(...toMax)
+  	//var toMax = Object.values(this.props.totals)
+  	//var max = Math.max(...toMax)
+  	var max = Math.max(today.total, yesterday.total, average.total)
     return (
 		<div class="CardItems">
-			<Bar label="today (est.)" value={today} width={Math.floor(today/max*100)} highlight={true} units={this.props.units} />
-			<Bar label="yesterday" value={yesterday} width={Math.floor(yesterday/max*100)} units={this.props.units} />
-			<Bar label="average" value={average} width={Math.floor(average/max*100)} units={this.props.units} />
+			<Bar label="today (est.)" value={today.total} width={Math.floor(today.total/max*100)}
+			 leftWidth={Math.floor(today.tillNow/today.total*100)} highlight={true} units={this.props.units} />
+			<Bar label="average" value={average.total} width={Math.floor(average.total/max*100)}
+			 leftWidth={Math.floor(average.tillNow/average.total*100)} units={this.props.units} />			
+			<Bar label="yesterday" value={yesterday.total} width={Math.floor(yesterday.total/max*100)}
+			 leftWidth={Math.floor(yesterday.tillNow/yesterday.total*100)} units={this.props.units} />
 		</div>
     )
   }
@@ -80,9 +84,10 @@ class Bar extends Component {
 	}
 
 	var color = this.props.highlight ? 'var(--text-background-highlight)' : 'var(--text-background)'
+	var darkcolor = this.props.highlight ? 'var(--text-background-highlight-dark)' : 'var(--text-background-dark)'
 	const style = {
 		width: `${this.props.width}%`,
-		backgroundColor: color
+		background: 'linear-gradient(90deg, '+color+' '+`${this.props.leftWidth}%`+', '+darkcolor+' '+`${this.props.leftWidth}%`+')'
 	}
 
 	return (

@@ -11,8 +11,10 @@
 	--card-bar-color: red;
 	--card-text-highlight-color: white;
 	--card-text-color: LightGrey;
-	--text-background-highlight: #009499;
+	--text-background-highlight: LightSlateGrey;
+	--text-background-highlight-dark: #454f59;
 	--text-background: Grey;
+	--text-background-dark: DimGrey;
 }
 
 body {
