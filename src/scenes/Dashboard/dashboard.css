@@ -20,6 +20,7 @@
 body {
 	margin: 0;
 	font-family: 'roboto', sans-serif;
+	color: var(--card-text-color);
 }
 
 .MainBackground {
@@ -101,6 +102,29 @@ body {
 
 .GraphBar {
 	align-self: flex-start;
+}
+
+.LabelContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.Label {
+	background-color: var(--text-background);
+	border-radius: 20px;
+	padding: 3px 10px;
+	margin: 5px;
+}
+
+.LabelText {
+	font-weight: bold;
+	font-size: 18px;
+	color: var(--card-text-highlight-color);
+	text-transform: lowercase;
 }
 
 .CardBodyText {

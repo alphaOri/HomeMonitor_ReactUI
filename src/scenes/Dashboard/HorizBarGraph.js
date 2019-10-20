@@ -25,7 +25,7 @@ class HorizBarGraph extends Component {
   	if (this.props.totals == null) {
 	    return (
 			<div class="CardItems">
-				No data...
+				No average data...
 			</div>
 	    ) 
 	}

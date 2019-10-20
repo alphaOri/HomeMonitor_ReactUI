@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './dashboard.css'
 import '../fonts/material-design-icons/iconfont/material-icons.css'
 import HorizBarGraph from './HorizBarGraph'
+import SourceLabels from './SourceLabels'
 import CardHeader from './CardHeader'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import DisplayValue from './LittleBits.js'
@@ -68,6 +69,7 @@ class WaterCard extends Component {
 						<DisplayValue value={this.props.water.flow} units={"gal/min"}/>
 					</div>
 				</div>
+				<SourceLabels sources={this.props.water.sources}/>
 				<HorizBarGraph units="gallons" totals={this.props.water.totals}/>
 			</div>
 		</div>
