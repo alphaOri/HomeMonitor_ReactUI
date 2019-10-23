@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './dashboard.css'
 import '../fonts/material-design-icons/iconfont/material-icons.css'
 import './roboto-font.css'
-import WaterCard from './WaterCard'
+import HomeWaterCard from './HomeWaterCard'
+import WaterFullscreenCard from './WaterFullscreenCard'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 
 class Dashboard extends Component {
@@ -21,7 +22,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-  	//console.log("WaterCard - componentDidMount()")
+  	//console.log("dashboard - componentDidMount()")
   	// request historical data
   	uibuilder.send({'topic':'dashboard','payload':'initialize'})
   }
@@ -44,7 +45,7 @@ class Dashboard extends Component {
 		    <div class="MainBackground">
 	  			<div class="MainTopBar">
 					<div class="CardBarTitle">
-						Connecting to Node-Red...
+						Connecting...
 					</div>
 	    		</div>
 				<div class="CardBoardContainer">
@@ -65,7 +66,7 @@ class Dashboard extends Component {
 					</div>
 	    		</div>
 				<div class="CardBoardContainer">
-					<WaterCard water={this.props.payload.water} 
+					<HomeWaterCard water={this.props.payload.water} 
 					fullscreenClick = {this.handleFullscreen}/>
 				</div>
 	    	</div>
@@ -75,14 +76,13 @@ class Dashboard extends Component {
 			<div class="MainBackground">
 	  			<div class="MainTopBar">
 					<div class="CardBarTitle">
-						Home
+						Water
 					</div>
 					<div class="CardBarRight">
-						<i class="material-icons md-36">settings</i>
+						<i class="material-icons md-36" onClick={() => {this.handleFullscreen("none")}}>arrow_back</i>
 					</div>
 	    		</div>
-				<div class="CardBoardContainer">
-				</div>
+				<WaterFullscreenCard water={this.props.payload.water}/>
 	    	</div>
 	    )
 	}

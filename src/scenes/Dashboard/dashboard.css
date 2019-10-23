@@ -43,10 +43,18 @@ body {
 .CardBoardContainer {
 	padding: 5px;
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .CardContainer {
 	width: 50%;
+	margin: 5px;
+	background-color: var(--card-background-color);
+}
+
+.CardFullwidthContainer {
+	width: 100%;
+	flex-basis: 100%;
 	margin: 5px;
 	background-color: var(--card-background-color);
 }
@@ -58,6 +66,18 @@ body {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.TabBar {
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.Tab {
+	background-color: var(--main-background-color);
 }
 
 .CardBarTitle {
