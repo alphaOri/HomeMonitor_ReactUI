@@ -16,7 +16,7 @@ class WaterLiveCard extends Component {
   componentDidMount() {
   	//console.log("WaterLiveCard - componentDidMount()")
   	// request historical data
-  	uibuilder.send({'topic':'water','payload':'initialize'})
+  	uibuilder.send({'topic':'water','payload': {liveCard: 'initialize'}})
   }
 
   shouldComponentUpdate(nextProps){

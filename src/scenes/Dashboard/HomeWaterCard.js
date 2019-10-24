@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './dashboard.css'
 import '../fonts/material-design-icons/iconfont/material-icons.css'
 import CardHeader from './CardHeader'
-import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
+//import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import WaterLiveCard from './WaterLiveCard'
 
 class HomeWaterCard extends Component {

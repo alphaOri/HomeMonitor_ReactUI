@@ -23,7 +23,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
   	//console.log("dashboard - componentDidMount()")
-  	// request historical data
+  	// this is cycled back into the ui in Node-Red to cause it to render for the first time
   	uibuilder.send({'topic':'dashboard','payload':'initialize'})
   }
 

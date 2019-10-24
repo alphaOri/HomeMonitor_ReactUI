@@ -11,8 +11,8 @@
 	--card-bar-color: red;
 	--card-text-highlight-color: white;
 	--card-text-color: LightGrey;
-	--text-background-highlight: LightSlateGrey;
-	--text-background-highlight-dark: #454f59;
+	--text-background-highlight: Grey;
+	--text-background-highlight-dark: DimGrey;
 	--text-background: Grey;
 	--text-background-dark: DimGrey;
 }
@@ -61,7 +61,7 @@ body {
 
 .CardBar {
 	background-color: var(--card-bar-color);
-	height: 60px;
+	height: 50px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -69,15 +69,17 @@ body {
 }
 
 .TabBar {
-	height: 60px;
+	height: 50px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	align-items: center;
 }
 
 .Tab {
-	background-color: var(--main-background-color);
+	flex: 1;
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .CardBarTitle {
@@ -134,7 +136,7 @@ body {
 }
 
 .Label {
-	background-color: var(--text-background);
+	background-color: var(--text-background-dark);
 	border-radius: 20px;
 	padding: 3px 10px;
 	margin: 5px;

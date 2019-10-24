@@ -1,7 +1,7 @@
 /*Reactstuff*/
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { findDOMNode } from 'react-dom';
+//import ReactDOM from 'react-dom';
+//import { findDOMNode } from 'react-dom';
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import Dashboard from '../Dashboard/dashboard.js'
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './dashboard.css';
 import '../fonts/material-design-icons/iconfont/material-icons.css'
 
