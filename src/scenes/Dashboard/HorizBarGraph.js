@@ -30,6 +30,8 @@ class HorizBarGraph extends Component {
 	    ) 
 	}
 
+	//todo: handle not all totals being defined
+	//todo: handle having a total = 0
   	var {today, yesterday, average} = this.props.totals
   	//var toMax = Object.values(this.props.totals)
   	//var max = Math.max(...toMax)
