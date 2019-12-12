@@ -34,7 +34,7 @@ class SourceLabels extends Component {
 		<div class="CardItems">
 			<div class="LabelContainer">
 			    {this.props.sources.map((source, index) => (
-			        <Label key={index} text={source.name} />
+			        <Label key={index} text={source.name+"-"+source.clicks} />
 			    ))}
 			</div>
 		</div>
