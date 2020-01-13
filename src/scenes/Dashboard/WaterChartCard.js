@@ -42,10 +42,10 @@ class WaterChartCard extends Component {
 
   shouldComponentUpdate(nextProps, nextState){
   	if((nextProps.chart == null)/* && (this.state === nextState)*/){
-  		console.log("WaterChartCard:shouldComponentUpdate:return false")
+  		//console.log("WaterChartCard:shouldComponentUpdate:return false")
   		return false
   	}
-  	console.log("WaterChartCard:shouldComponentUpdate:return true")
+  	//console.log("WaterChartCard:shouldComponentUpdate:return true")
 	return true
   }
 
@@ -69,7 +69,7 @@ class WaterChartCard extends Component {
 	    	<TabsHeader tabList={chartTabList} currentTab={this.state.currentTab} tabClickHandler={this.handleTabClick} 
 				defaultColor='var(--main-background-color)' highlightColor='var(--card-background-color)'/>
 			<ChartCard topic="water" cumulative={this.state.stackedChart.cumulative} chartDisplay={this.state.stackedChart.chartDisplay} 
-				rangeOffset={this.state.offset} chartType="stacked" chartData={this.props.chart.stackedData} currentTab={this.state.currentTab}/>
+				rangeOffset={this.state.offset} chartType="stacked" chartData={this.props.chart.chartData} currentTab={this.state.currentTab}/>
 		</React.Fragment>
     )
   }

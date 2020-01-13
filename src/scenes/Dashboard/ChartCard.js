@@ -9,7 +9,7 @@ import FusionCharts from 'fusioncharts';
 // Step 4 - Include the chart type
 import Column2D from 'fusioncharts/fusioncharts.charts';
 // Step 5 - Include the theme as fusion
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
 // Step 6 - Adding the chart and theme as dependency to the core fusioncharts
 import Widgets from "fusioncharts/fusioncharts.widgets"
 ReactFC.fcRoot(FusionCharts, Widgets, Column2D, FusionTheme);
@@ -26,72 +26,66 @@ ReactFC.fcRoot(FusionCharts, Widgets, Column2D, FusionTheme);
 }*/
 
 var chartConfigs = {
+  //todo: get roboto font to be used with 15px size
+  //todo: get labels slanted
+  //todo: 
   id: "stockRealTimeChart",
-      type: 'realtimearea',
-      renderAt: 'chart-container',
-      width: '700',
-      height: '400',
-      dataFormat: 'json',
-      dataSource: {
-        "chart": {
-          "theme": "fusion",
-          "caption": "Real-time stock price monitor",
-          "subCaption": "Harry's SuperMart",
-          "xAxisName": "Time",
-          "yAxisName": "Stock Price",
-          "numberPrefix": "$",
-          "refreshinterval": "5",
-          "yaxisminvalue": "35",
-          "yaxismaxvalue": "36",
-          "numdisplaysets": "10",
-          "labeldisplay": "rotate",
-          "showRealTimeValue": "0"
-
-        },
-        "categories": [{
-          "category": [{
-            "label": "Day Start"
-          }]
-        }],
-        "dataset": [{
-          "data": [{
-            "value": "35.27"
-          }]
-        }]
-      },
-      "events": {
-        "initialized": function(e) {
-          function addLeadingZero(num) {
-            return (num <= 9) ? ("0" + num) : num;
-          }
-
-          function updateData() {
-            // Get reference to the chart using its ID
-            var chartRef = FusionCharts("stockRealTimeChart"),
-              // We need to create a querystring format incremental update, containing
-              // label in hh:mm:ss format
-              // and a value (random).
-              currDate = new Date(),
-              label = addLeadingZero(currDate.getHours()) + ":" +
-              addLeadingZero(currDate.getMinutes()) + ":" +
-              addLeadingZero(currDate.getSeconds()),
-              // Get random number between 35.25 & 35.75 - rounded to 2 decimal places
-              randomValue = Math.floor(Math.random() *
-                50) / 100 + 35.25,
-              // Build Data String in format &label=...&value=...
-              strData = "&label=" + label +
-              "&value=" +
-              randomValue;
-            // Feed it to chart.
-            chartRef.feedData(strData);
-          }
-
-          var myVar = setInterval(function() {
-            updateData();
-          }, 5000);
-        }
-      }
-    }
+  type: 'realtimearea',
+  //renderAt: 'chart-container',
+  width: '1100',
+  height: '500',
+  dataFormat: 'json',
+  dataSource: {
+    "chart": {
+      "theme": "candy",
+      "caption": "Real-time Water Usage",
+      //"subCaption": "Harry's SuperMart",
+      "xAxisName": "Time (min:sec)",
+      "yAxisName": "Flow Rate (gallons/minute)",
+      //"numberPrefix": "$",
+      //"updateInterval": "0.5",
+      "refreshinterval": "0.5",
+      //"refreshInstantly": "true",
+      //"yaxisminvalue": "5",
+      "yaxismaxvalue": "5",
+      "numdisplaysets": "60",
+      "labelDisplay": "rotate",
+      "slantLabels": "true",
+      "showRealTimeValue": "0",
+      //-----cosmetics-------//
+      "captionFont": "roboto,sans-serif",
+      "captionFontSize": "15",
+      "bgColor": "#363636",
+      "canvasBgColor": "#363636",
+      "baseFontColor": "#d3d3d3",
+      "baseFont": "roboto,sans-serif",
+      "yAxisNameFontColor": "#d3d3d3",
+      "yAxisValueFontColor": "#d3d3d3",
+      "xAxisNameFontColor": "#d3d3d3",
+      "divlineColor": "#d3d3d3",
+      "divlineThickness": "1",
+      "divLineIsDashed": "1",
+      "divLineDashLen": "1",
+      "divLineGapLen": "1",
+      "showXAxisLine": "1",
+      "xAxisLineThickness": "1",
+      "xAxisLineColor": "#d3d3d3",
+      "showAlternateHGridColor": "0",
+      "vDivlineColor": "#d3d3d3",
+      "vDivlineThickness": "1",
+    },
+    "categories": [{
+        "category": [{
+        "label": ""
+      }]
+    }],
+    "dataset": [{
+      "data": [{
+        "value": "0"
+      }]
+    }]
+  }
+}
 
 
 class ChartCard extends Component {
@@ -112,19 +106,23 @@ class ChartCard extends Component {
   	if(!((nextProps.currentTab === this.props.currentTab) && (nextProps.cumulative === this.props.cumulative) && (nextProps.rangeOffset === this.props.rangeOffset))){
   		uibuilder.send({'topic': this.props.topic,'payload':{chart: {type: this.props.chartType, range: this.props.currentTab, rangeOffset: this.props.rangeOffset, cumulative: this.props.cumulative}}})
       //chartConfigs.dataSource={}
+      console.log("ChartCard:shouldComponentUpdate:return true")
       return true
   	}
     if((nextProps.chartDisplay === this.props.chartDisplay) && (nextProps.chartData == null)){
+      console.log("ChartCard:shouldComponentUpdate:return false")
       return false
     }
+    console.log("ChartCard:shouldComponentUpdate:return true")
 	  return true
   }
 
   render() {
-  	//console.log("ChartCard.js:render(): ")
-  	//console.log(this.props)
+  	console.log("ChartCard.js:render(): ")
+  	console.log(this.props)
 
   	if (this.props.chartData == null) {
+      console.log("chartData null render")
       return (
       	<div class="CardBody">
           <ReactFC type={this.props.chartDisplay} {...chartConfigs}/>
@@ -134,11 +132,15 @@ class ChartCard extends Component {
 
     //chartConfigs.dataSource=this.props.chartData
 
-    return (
-      <div class="CardBody">
-        <ReactFC type={this.props.chartDisplay} {...chartConfigs}/>
-      </div>
-    )
+    if (this.props.currentTab = "now") {
+      var chartRef = FusionCharts("stockRealTimeChart")
+      chartRef.feedData(this.props.chartData)
+      return (
+        <div class="CardBody">
+          <ReactFC type={this.props.chartDisplay} {...chartConfigs}/>
+        </div>
+      )
+    }
   }
 }
 
