@@ -27,12 +27,12 @@ class WaterChartCard extends Component {
 	});
   }
 
-  handleDisplayTypeClick = (text) => {
+  /*handleDisplayTypeClick = (text) => {
   	//console.log("WaterChartCard - handleTabClick()")
   	this.setState({
 	  stackedChart.chartDisplay: text
 	});
-  }
+  }*/
 
   componentDidMount() {
   	//console.log("WaterChartCard - componentDidMount()")
@@ -41,7 +41,7 @@ class WaterChartCard extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-  	if((nextProps.chart == null) && (this.state === nextState)){
+  	if((nextProps.chart == null)/* && (this.state === nextState)*/){
   		console.log("WaterChartCard:shouldComponentUpdate:return false")
   		return false
   	}

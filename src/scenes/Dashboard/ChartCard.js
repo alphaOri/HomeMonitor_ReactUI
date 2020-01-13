@@ -34,19 +34,19 @@ class ChartCard extends Component {
   componentDidMount() {
   	//console.log("ChartCard - componentDidMount()")
   	// request historical data
-  	uibuilder.send({'topic':'water','payload':{chart: {type: this.props.chartType, range: this.props.currentTab, rangeOffset: this.props.rangeOffset, cumulative: this.props.cumulative}}})
+  	uibuilder.send({'topic': this.props.topic, 'payload': {chart: {type: this.props.chartType, range: this.props.currentTab, rangeOffset: this.props.rangeOffset, cumulative: this.props.cumulative}}})
   }
 
   shouldComponentUpdate(nextProps){
+    //console.log("ChartCard:shouldComponentUpdate:return true")
   	if(!((nextProps.currentTab === this.props.currentTab) && (nextProps.cumulative === this.props.cumulative) && (nextProps.rangeOffset === this.props.rangeOffset))){
-  		uibuilder.send({'topic':'water','payload':{chart: {type: this.props.chartType, range: this.props.currentTab, rangeOffset: this.props.rangeOffset, cumulative: this.props.cumulative}}})
+  		uibuilder.send({'topic': this.props.topic,'payload':{chart: {type: this.props.chartType, range: this.props.currentTab, rangeOffset: this.props.rangeOffset, cumulative: this.props.cumulative}}})
       chartConfigs.dataSource={}
       return true
   	}
     if((nextProps.chartDisplay === this.props.chartDisplay) && (nextProps.chartData == null)){
       return false
     }
-  	//console.log("ChartCard:shouldComponentUpdate:return true")
 	  return true
   }
 
