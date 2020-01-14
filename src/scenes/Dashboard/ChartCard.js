@@ -119,23 +119,23 @@ class ChartCard extends Component {
   	if(!((nextProps.currentTab === this.props.currentTab) && (nextProps.cumulative === this.props.cumulative) && (nextProps.rangeOffset === this.props.rangeOffset))){
   		uibuilder.send({'topic': this.props.topic,'payload':{chart: {type: this.props.chartType, range: this.props.currentTab, rangeOffset: this.props.rangeOffset, cumulative: this.props.cumulative}}})
       //chartConfigs.dataSource={}
-      console.log("ChartCard:shouldComponentUpdate:return true")
+      //console.log("ChartCard:shouldComponentUpdate:return true")
       return true
   	}
     if((nextProps.chartDisplay === this.props.chartDisplay) && (nextProps.chartData == null)){
-      console.log("ChartCard:shouldComponentUpdate:return false")
+      //console.log("ChartCard:shouldComponentUpdate:return false")
       return false
     }
-    console.log("ChartCard:shouldComponentUpdate:return true")
+    //console.log("ChartCard:shouldComponentUpdate:return true")
 	  return true
   }
 
   render() {
-  	console.log("ChartCard.js:render(): ")
-  	console.log(this.props)
+  	//console.log("ChartCard.js:render(): ")
+  	//console.log(this.props)
 
   	if (this.props.chartData == null) {
-      console.log("chartData null render")
+      //console.log("chartData null render")
       return (
       	<div class="CardBody">
           <ReactFC type={this.props.chartDisplay} {...chartConfigs}/>
