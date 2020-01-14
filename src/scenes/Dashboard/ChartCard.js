@@ -26,9 +26,7 @@ ReactFC.fcRoot(FusionCharts, Widgets, Column2D, FusionTheme);
 }*/
 
 var chartConfigs = {
-  //todo: get roboto font to be used with 15px size
-  //todo: get labels slanted
-  //todo: 
+  //todo: get fonts the right size
   id: "stockRealTimeChart",
   type: 'realtimearea',
   //renderAt: 'chart-container',
@@ -38,6 +36,7 @@ var chartConfigs = {
   dataSource: {
     "chart": {
       "theme": "candy",
+      "animation": "0",
       "caption": "Real-time Water Usage",
       //"subCaption": "Harry's SuperMart",
       "xAxisName": "Time (min:sec)",
@@ -48,20 +47,34 @@ var chartConfigs = {
       //"refreshInstantly": "true",
       //"yaxisminvalue": "5",
       "yaxismaxvalue": "5",
-      "numdisplaysets": "60",
-      "labelDisplay": "rotate",
-      "slantLabels": "true",
+      "numdisplaysets": "120", //2 minutes
+      "labelDisplay": "NONE",
+      "slantLabels": "1",
       "showRealTimeValue": "0",
+      "showPlotBorder": "1",
+      "inheritPlotBorderColor": "1",
       //-----cosmetics-------//
-      "captionFont": "roboto,sans-serif",
-      "captionFontSize": "15",
+      "paletteColors": "#ffc000",
       "bgColor": "#363636",
       "canvasBgColor": "#363636",
+      "baseFont": "Roboto",
       "baseFontColor": "#d3d3d3",
-      "baseFont": "roboto,sans-serif",
+      "baseFontSize": "15",
+      "outCnvBaseFont": "Roboto",
+      "outCnvBaseFontColor": "#d3d3d3",
+      "outCnvBaseFontSize": "15",
+      "captionFont": "Roboto",
+      "yAxisNameFont": "Roboto",
+      "yAxisValueFont": "Roboto",
+      "xAxisNameFont": "Roboto",
+      "captionFontColor": "#d3d3d3",
       "yAxisNameFontColor": "#d3d3d3",
       "yAxisValueFontColor": "#d3d3d3",
-      "xAxisNameFontColor": "#d3d3d3",
+      "xAxisNameFontColor": "#d3d3d3",  
+      "captionFontSize": "18",
+      "yAxisNameFontSize": "16",
+      "yAxisValueFontSize": "15",
+      "xAxisNameFontSize": "16",          
       "divlineColor": "#d3d3d3",
       "divlineThickness": "1",
       "divLineIsDashed": "1",
