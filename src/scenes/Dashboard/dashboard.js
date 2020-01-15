@@ -4,6 +4,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import './roboto-font.css'
 import HomeWaterCard from './HomeWaterCard'
 import WaterFullscreenCard from './WaterFullscreenCard'
+import HeaderClock from './HeaderClock'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 
 class Dashboard extends Component {
@@ -58,9 +59,15 @@ class Dashboard extends Component {
 	    return (
 	  		<div class="MainBackground">
 	  			<div class="MainTopBar">
-					<div class="CardBarTitle">
-						Home
-					</div>
+	                <div class="CardBarLeft">
+	                    <i class="material-icons md-36">menu</i>
+	    				<div class="CardBarTitle">
+	    					Home
+	    				</div>
+	                </div>
+	                <div class="CardBarMiddle">
+	                	<HeaderClock/>
+	                </div>
 					<div class="CardBarRight">
 						<i class="material-icons md-36">settings</i>
 					</div>
@@ -75,11 +82,17 @@ class Dashboard extends Component {
 		return (
 			<div class="MainBackground">
 	  			<div class="MainTopBar">
-					<div class="CardBarTitle">
-						Water
-					</div>
+	                <div class="CardBarLeft">
+	                    <i class="material-icons md-36" onClick={() => {this.handleFullscreen("none")}}>arrow_back</i>
+	    				<div class="CardBarTitle">
+	    					Water
+	    				</div>
+	                </div>
+	                <div class="CardBarMiddle">
+	                	<HeaderClock/>
+	                </div>
 					<div class="CardBarRight">
-						<i class="material-icons md-36" onClick={() => {this.handleFullscreen("none")}}>arrow_back</i>
+						<i class="material-icons md-36">settings</i>
 					</div>
 	    		</div>
 				<WaterFullscreenCard water={this.props.payload.water}/>

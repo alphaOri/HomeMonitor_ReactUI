@@ -90,6 +90,20 @@ body {
 	color: var(--card-text-highlight-color);
 }
 
+.CardBarLeft {
+	display: flex;
+	color: var(--card-text-highlight-color);
+	margin-left:  20px;
+	margin-right: 20px;
+	align-items: center;
+}
+
+.CardBarMiddle {
+	font-weight: bold;
+	font-size: 20px;
+	color: var(--card-text-highlight-color);
+}
+
 .CardBarRight {
 	color: var(--card-text-highlight-color);
 	margin-left:  20px;
