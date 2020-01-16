@@ -23,6 +23,8 @@ body {
 	color: var(--card-text-color);
 }
 
+button { font-family: inherit }
+
 .MainBackground {
 	background-color: var(--main-background-color);
 	overflow: auto;
@@ -136,6 +138,15 @@ body {
 	align-items: center;
 }
 
+.RectangularButton {
+  background-color: #FF0000;
+  border: none;
+  color: white;
+  text-align: center;
+  border-radius: 3px;
+  padding: 12px 25px;
+}
+
 .GraphBar {
 	align-self: flex-start;
 }
@@ -179,6 +190,14 @@ body {
 	text-transform: uppercase;
 }
 
+.CardBodyTextCenteredHighlight {
+	margin-right: auto;
+	font-weight: bold;
+	font-size: 15px;
+	color: var(--card-text-highlight-color);
+	text-transform: uppercase;
+}
+
 .CardBodyTextHighlight {
 	font-weight: bold;
 	font-size: 22px;
@@ -187,16 +206,16 @@ body {
 	margin-left: 10px;
 }
 
-.CardBodyUnits {
-	font-size: 18px;
-	display: inline;
-}
-
 .CardBodyTextHighlightCentered {
 	margin-left: auto;
 	font-weight: bold;
 	font-size: 22px;
 	color: var(--card-text-highlight-color);
+}
+
+.CardBodyUnits {
+	font-size: 18px;
+	display: inline;
 }
 
 .HorizBarChart {

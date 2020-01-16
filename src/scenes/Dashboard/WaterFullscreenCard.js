@@ -4,6 +4,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 //import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import WaterLiveCard from './WaterLiveCard'
 import WaterChartCard from './WaterChartCard'
+import WaterValveCard from './WaterValveCard'
 
 class WaterFullscreenCard extends Component {
   constructor(props) {
@@ -42,6 +43,9 @@ class WaterFullscreenCard extends Component {
 				<div class="CardContainer">
 					<WaterLiveCard liveInfo={undefined}/>
 				</div>
+				<div class="CardContainer">
+					<WaterValveCard valve={undefined}/>
+				</div>
 			</div>
 	    ) 
 	}
@@ -53,6 +57,9 @@ class WaterFullscreenCard extends Component {
 			</div>
 			<div class="CardContainer">
 				<WaterLiveCard liveInfo={this.props.water.liveInfo}/>
+			</div>
+			<div class="CardContainer">
+				<WaterValveCard valve={this.props.water.valve}/>
 			</div>
 		</div>
     ) 

@@ -24,7 +24,7 @@ class HeaderClock extends Component {
   }
 
   render() {
-    console.log("HeaderClock.js:render():")
+    //console.log("HeaderClock.js:render():")
     return (
       <div> {dayOfWeek[this.state.time.getDay()]}, {monthOfYear[this.state.time.getMonth()]} {this.state.time.getDate()}, {this.state.time.toLocaleTimeString()} </div>
     )

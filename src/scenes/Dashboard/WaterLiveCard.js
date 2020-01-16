@@ -48,7 +48,7 @@ class WaterLiveCard extends Component {
 
     return (
 		<div class="CardBody">
-			<div class="CardItems" style={{width: "65%"}}>
+			<div class="CardItems" style={{width: "55%"}}>
 				<div class="CardItem">
 					<div class="CardBodyTextCentered">
 						so far today
@@ -68,8 +68,5 @@ class WaterLiveCard extends Component {
     )
   }
 }
-
-
-
 
 export default WaterLiveCard

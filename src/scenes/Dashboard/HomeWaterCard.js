@@ -42,8 +42,7 @@ class HomeWaterCard extends Component {
 
     return (
 		<div class="CardContainer">
-			<CardHeader title="Water" 
-				fullscreenClick={this.props.fullscreenClick} type="water"/>
+			<CardHeader title="Water" fullscreenClick={this.props.fullscreenClick} type="water"/>
 			<WaterLiveCard liveInfo={this.props.water.liveInfo}/>
 		</div>
     )
