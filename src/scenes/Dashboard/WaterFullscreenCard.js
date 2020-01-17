@@ -43,7 +43,7 @@ class WaterFullscreenCard extends Component {
 				<div class="CardContainer">
 					<WaterLiveCard liveInfo={undefined}/>
 				</div>
-				<div class="CardContainer">
+				<div class="MiniCardContainer">
 					<WaterValveCard valve={undefined}/>
 				</div>
 			</div>
@@ -58,7 +58,7 @@ class WaterFullscreenCard extends Component {
 			<div class="CardContainer">
 				<WaterLiveCard liveInfo={this.props.water.liveInfo}/>
 			</div>
-			<div class="CardContainer">
+			<div class="MiniCardContainer">
 				<WaterValveCard valve={this.props.water.valve}/>
 			</div>
 		</div>

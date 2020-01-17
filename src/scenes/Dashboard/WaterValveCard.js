@@ -37,7 +37,7 @@ class WaterValveCard extends Component {
 
 	if (this.props.valve == null) {
 	    return (
-			<div class="CardBody">
+			<div class="MiniCardBody">
 				<div class="CardItems" style={{width: "55%"}}>
 					<div class="CardItem">
 		                <div class="CardBodyTextCentered">
@@ -61,7 +61,7 @@ class WaterValveCard extends Component {
 	}
 
     return (
-		<div class="CardBody">
+		<div class="MiniCardBody">
 			<div class="CardItems" style={{width: "55%"}}>
 				<div class="CardItem">
 	                <div class="CardBodyTextCentered">

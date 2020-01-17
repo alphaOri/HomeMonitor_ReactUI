@@ -11,8 +11,8 @@
 	--card-bar-color: red;
 	--card-text-highlight-color: white;
 	--card-text-color: LightGrey;
-	--text-background-highlight: Grey;
-	--text-background-highlight-dark: DimGrey;
+	--text-background-highlight: LightSlateGrey;
+	--text-background-highlight-dark: #454f59;
 	--text-background: Grey;
 	--text-background-dark: DimGrey;
 }
@@ -49,21 +49,27 @@ button { font-family: inherit }
 }
 
 .CardContainer {
-	width: 50%;
+	width: 585px;
 	margin: 5px;
-	background-color: var(--card-background-color);
+}
+
+.MiniCardContainer {
+	width: 585px;
+	margin: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 }
 
 .CardFullwidthContainer {
 	width: 100%;
 	flex-basis: 100%;
 	margin: 5px;
-	background-color: var(--card-background-color);
 }
 
 .CardBar {
 	background-color: var(--card-bar-color);
-	height: 50px;
+	height: 60px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -118,6 +124,17 @@ button { font-family: inherit }
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background-color: var(--card-background-color);
+}
+
+.MiniCardBody {
+	padding: 7px;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--card-background-color);
 }
 
 .CardItems {
@@ -161,7 +178,7 @@ button { font-family: inherit }
 }
 
 .Label {
-	background-color: var(--text-background-dark);
+	background-color: var(--text-background);
 	border-radius: 20px;
 	padding: 3px 10px;
 	margin: 5px;

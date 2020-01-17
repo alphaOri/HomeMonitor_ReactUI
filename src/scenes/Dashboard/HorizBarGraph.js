@@ -38,7 +38,7 @@ class HorizBarGraph extends Component {
   	var max = Math.max(today.total, yesterday.total, average.total)
     return (
 		<div class="CardItems">
-			<Bar label="today (est.)" value={today.total} width={Math.floor(today.total/max*100)}
+			<Bar label="today" value={today.total} width={Math.floor(today.total/max*100)}
 			 leftWidth={Math.floor(today.tillNow/today.total*100)} highlight={true} units={this.props.units} />
 			<Bar label="average" value={average.total} width={Math.floor(average.total/max*100)}
 			 leftWidth={Math.floor(average.tillNow/average.total*100)} units={this.props.units} />			
