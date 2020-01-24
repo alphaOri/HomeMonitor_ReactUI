@@ -34,7 +34,7 @@ button { font-family: inherit }
 
 .MainTopBar {
 	background-color: var(--main-card-bar-color);
-	height: 60px;
+	height: 68px;
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -69,7 +69,7 @@ button { font-family: inherit }
 
 .CardBar {
 	background-color: var(--card-bar-color);
-	height: 60px;
+	height: 62px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -94,7 +94,7 @@ button { font-family: inherit }
 	margin-left:  20px;
 	margin-right: 20px;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 24px;
 	color: var(--card-text-highlight-color);
 }
 
@@ -108,7 +108,7 @@ button { font-family: inherit }
 
 .CardBarMiddle {
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 24px;
 	color: var(--card-text-highlight-color);
 }
 
@@ -161,7 +161,8 @@ button { font-family: inherit }
   color: white;
   text-align: center;
   border-radius: 3px;
-  padding: 12px 25px;
+  height: 58px;
+  width: 100px;
 }
 
 .GraphBar {
@@ -186,14 +187,14 @@ button { font-family: inherit }
 
 .LabelText {
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 20px;
 	color: var(--card-text-highlight-color);
 	text-transform: lowercase;
 }
 
 .CardBodyText {
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	color: var(--card-text-color);
 	text-transform: uppercase;
 	white-space: nowrap;
@@ -202,7 +203,7 @@ button { font-family: inherit }
 .CardBodyTextCentered {
 	margin-right: auto;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	color: var(--card-text-color);
 	text-transform: uppercase;
 }
@@ -210,14 +211,14 @@ button { font-family: inherit }
 .CardBodyTextCenteredHighlight {
 	margin-right: auto;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	color: var(--card-text-highlight-color);
 	text-transform: uppercase;
 }
 
 .CardBodyTextHighlight {
 	font-weight: bold;
-	font-size: 22px;
+	font-size: 24px;
 	color: var(--card-text-highlight-color);
 	white-space: nowrap;
 	margin-left: 10px;
@@ -226,12 +227,12 @@ button { font-family: inherit }
 .CardBodyTextHighlightCentered {
 	margin-left: auto;
 	font-weight: bold;
-	font-size: 22px;
+	font-size: 24px;
 	color: var(--card-text-highlight-color);
 }
 
 .CardBodyUnits {
-	font-size: 18px;
+	font-size: 22px;
 	display: inline;
 }
 

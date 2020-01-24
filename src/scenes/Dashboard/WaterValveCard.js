@@ -62,7 +62,7 @@ class WaterValveCard extends Component {
 
     return (
 		<div class="MiniCardBody">
-			<div class="CardItems" style={{width: "55%"}}>
+			<div class="CardItems" style={{width: "60%"}}>
 				<div class="CardItem">
 	                <div class="CardBodyTextCentered">
 	                    water valve is
