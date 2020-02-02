@@ -5,6 +5,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import WaterLiveCard from './WaterLiveCard'
 import WaterChartCard from './WaterChartCard'
 import WaterValveCard from './WaterValveCard'
+import WaterPressureCard from './WaterPressureCard'
 
 class WaterFullscreenCard extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class WaterFullscreenCard extends Component {
 				</div>
 				<div class="MiniCardContainer">
 					<WaterValveCard valve={undefined}/>
+					<WaterPressureCard pressure={undefined}/>
 				</div>
 			</div>
 	    ) 
@@ -60,6 +62,7 @@ class WaterFullscreenCard extends Component {
 			</div>
 			<div class="MiniCardContainer">
 				<WaterValveCard valve={this.props.water.valve}/>
+				<WaterPressureCard pressure={this.props.water.pressure}/>
 			</div>
 		</div>
     ) 
