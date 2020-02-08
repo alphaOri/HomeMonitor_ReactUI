@@ -4,6 +4,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import './roboto-font.css'
 import HomeWaterCard from './HomeWaterCard'
 import WaterFullscreenCard from './WaterFullscreenCard'
+import HomeAirCard from './HomeAirCard'
 import HeaderClock from './HeaderClock'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 
@@ -74,6 +75,8 @@ class Dashboard extends Component {
 				<div class="CardBoardContainer">
 					<HomeWaterCard water={this.props.payload.water} 
 					fullscreenClick = {this.handleFullscreen}/>
+					<HomeAirCard air={this.props.payload.air} 
+					fullscreenClick = {this.handleFullscreen}/>
 				</div>
 	    	</div>
 		)
@@ -95,6 +98,26 @@ class Dashboard extends Component {
 					</div>
 	    		</div>
 				<WaterFullscreenCard water={this.props.payload.water}/>
+	    	</div>
+	    )
+	} else if (this.state.fullscreen === "air"){
+		return (
+			<div class="MainBackground">
+	  			<div class="MainTopBar">
+	                <div class="CardBarLeft">
+	                    <i class="material-icons md-36" onClick={() => {this.handleFullscreen("none")}}>arrow_back</i>
+	    				<div class="CardBarTitle">
+	    					Air
+	    				</div>
+	                </div>
+	                <div class="CardBarMiddle">
+	                	<HeaderClock/>
+	                </div>
+					<div class="CardBarRight">
+						<i class="material-icons md-36">settings</i>
+					</div>
+	    		</div>
+	    		{/* <WaterFullscreenCard water={this.props.payload.air}/> */}
 	    	</div>
 	    )
 	}

@@ -14,8 +14,6 @@ class HomeWaterCard extends Component {
 
   componentDidMount() {
   	//console.log("HomeWaterCard - componentDidMount()")
-  	// request historical data
-  	//uibuilder.send({'topic':'water','payload':'initialize'})
   }
 
   shouldComponentUpdate(nextProps){
