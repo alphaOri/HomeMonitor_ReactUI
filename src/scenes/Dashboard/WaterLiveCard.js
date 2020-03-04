@@ -4,7 +4,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import HorizBarGraph from './HorizBarGraph'
 import SourceLabels from './SourceLabels'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
-import DisplayValue from './LittleBits.js'
+import {DisplayValueSeparateUnits} from './DisplayValue.js'
 
 class WaterLiveCard extends Component {
   constructor(props) {
@@ -53,13 +53,17 @@ class WaterLiveCard extends Component {
 					<div class="CardBodyTextCentered">
 						so far today
 					</div>
-					<DisplayValue value={this.props.liveInfo.usage} units={"gallons"}/>
+					<div class="CardBodyTextHighlightCentered">
+						<DisplayValueSeparateUnits value={this.props.liveInfo.usage} units={"gallons"}/>
+					</div>
 				</div>
 				<div class="CardItem">
 					<div class="CardBodyTextCentered">
 						current usage
 					</div>
-					<DisplayValue value={this.props.liveInfo.flow} units={"gal/min"}/>
+					<div class="CardBodyTextHighlightCentered">
+						<DisplayValueSeparateUnits value={this.props.liveInfo.flow} units={"gal/min"}/>
+					</div>
 				</div>
 			</div>
 			<SourceLabels sources={this.props.liveInfo.sources}/>

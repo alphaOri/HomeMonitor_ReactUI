@@ -12,33 +12,33 @@ class HomeAirCard extends Component {
   }
 
   componentDidMount() {
-  	//console.log("HomeAirCard - componentDidMount()")
+  	console.log("HomeAirCard - componentDidMount()")
   }
 
   shouldComponentUpdate(nextProps){
   	if(nextProps.air == null){
-  		//console.log("HomeAirCard:shouldComponentUpdate:return false")
+  		console.log("HomeAirCard:shouldComponentUpdate:return false")
   		return false
   	}
-  	//console.log("HomeAirCard:shouldComponentUpdate:return true")
+  	console.log("HomeAirCard:shouldComponentUpdate:return true")
 	return true
   }
 
   render() {
-  	//console.log("HomeAirCard.js:render(): ")
-  	//console.log(this.props)
+  	console.log("HomeAirCard.js:render(): ")
+  	console.log(this.props)
 
 	if (this.props.air == null) {
 	    return (
-			<div class="CardContainer">
+			<div class="CardContainer" style={{height: "378px"}}>
 				<CardHeader title="Air (Connecting...)"/>
-				<AirLiveCard liveInfo={undefined}/>
+				<AirLiveCard liveData={undefined}/>
 			</div>
 	    ) 
 	}
 
     return (
-		<div class="CardContainer">
+		<div class="CardContainer" style={{height: "378px"}}>
 			<CardHeader title="Air" fullscreenClick={this.props.fullscreenClick} type="air"/>
 			<AirLiveCard liveData={this.props.air.liveData}/>
 		</div>

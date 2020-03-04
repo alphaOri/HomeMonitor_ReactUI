@@ -1,21 +1,27 @@
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
+.material-icons.md-42 { font-size: 42px; }
 .material-icons.md-44 { font-size: 44px; }
 .material-icons.md-48 { font-size: 48px; }
 
 :root {
 	--main-background-color: #272727;
 	--card-background-color: #363636;
-	--main-card-bar-color: #8F0000;
+	--main-card-bar-color: #B40000;
 	--card-bar-color: #B40000;
 	--card-text-highlight-color: white;
+	/*--card-text-highlight-color: #778899;*/
 	--card-text-color: LightGrey;
-	--text-background-highlight: LightSlateGrey;
-	--text-background-highlight-dark: #454f59;
+	--text-background-highlight: #516D91;
+	--text-background-highlight-dark: #3d516c;
 	--text-background: Grey;
 	--text-background-dark: DimGrey;
-	--button-color: #CB0000;
+	/*--button-color: #778899;*/ 
+	--button-color: #516d91; /*blue*/
+	--button-highlight-color: #3780de;
+	--button-alt-color: #FF8800;
+	--button-alt-highlight-color: #FFBF00;
 }
 
 body {
@@ -114,9 +120,13 @@ button { font-family: inherit }
 }
 
 .CardBarRight {
+	display:flex;
 	color: var(--card-text-highlight-color);
-	margin-left:  20px;
-	margin-right: 20px;
+	background-color: var(--card-bar-color);
+	padding-left:  20px;
+	padding-right: 20px;
+	height: 100%;
+	align-items: center;
 }
 
 .CardBody {
@@ -203,7 +213,7 @@ button { font-family: inherit }
 /*Water Card Styles*/
 
 .RectangularButton {
-  background-color: #FF0000;
+  background-color: var(--button-color);
   border: none;
   color: white;
   text-align: center;
@@ -305,7 +315,8 @@ button { font-family: inherit }
 
 .RectangleDisplay {
 	height: 66px;
-	background-color: var(--button-color);
+	background-color: var(--text-background-highlight-dark);
+    padding: 0px 6px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -335,3 +346,11 @@ button { font-family: inherit }
 	color: var(--card-text-highlight-color);
 }
 
+.ValueDisplayCaps {
+	margin: 6px;
+	font-weight: bold;
+	font-size: 18px;
+	color: var(--card-text-highlight-color);
+	text-transform: uppercase;
+	white-space: nowrap;
+}
