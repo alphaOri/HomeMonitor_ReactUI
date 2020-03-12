@@ -96,7 +96,9 @@ export class CircularButton extends Component {
   }
 }
 
-/*export class CircleTrim extends Component {
+//required props:
+//optional props: disable, left, right, flip
+export class CircleTrim extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -107,8 +109,7 @@ export class CircularButton extends Component {
     console.log("CircleButton:render():" )
     console.log(this.props)
 
-    var style = {left: "-7px"};
-    //style.left = "-7px";
+    var style = {};
     if(this.props.disable) {
       style.fill = "var(--text-background-highlight-dark)";
     }
@@ -122,15 +123,14 @@ export class CircularButton extends Component {
     if(this.props.flip) {
       style.transform = "scale(-1,1)";
     }
-    console.log(style)
 
     return (
-        <svg class="AroundCircleSvg" style={{left: "-7px"}} viewBox="0 0 3.415 17.462">
+        <svg class="AroundCircleSvg" style={style} viewBox="0 0 3.415 17.462">
           <path d="M.016 0a12.965 12.965 0 013.4 8.731V0zm3.4 8.731A12.965 12.965 0 010 17.463h3.415z"/>
         </svg>
       )
   }
-}*/
+}
 
 export class SquareButton extends Component {
   constructor(props) {

@@ -4,7 +4,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import '../fonts/icomoon/style.css'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import { DisplayValueAndUnits, DisplayValueSeparateUnits } from './DisplayValue.js'
-import { RectangularButton, CircularButton, SquareButton } from './Buttons.js'
+import { RectangularButton, CircularButton, CircleTrim, SquareButton } from './Buttons.js'
 
 class AirLiveCard extends Component {
   constructor(props) {
@@ -233,7 +233,7 @@ advanceOneState = () => {
             <div class="CircleRectangleButtons">
                 <div class="CircleButton" style={{marginRight: "-7px"}}>
                   <CircularButton disable={false} highlight={this.props.temperatureData.unitOn} icon={this.state.modeButtonStates[this.state.modeButtonCurrentState].icon} text={this.state.modeButtonStates[this.state.modeButtonCurrentState].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="40px" rightPosition="7px"/>
-                  <svg class="AroundCircleSvg" style={{left: "-7px"}} viewBox="0 0 3.415 17.462"><path d="M.016 0a12.965 12.965 0 013.4 8.731V0zm3.4 8.731A12.965 12.965 0 010 17.463h3.415z"/></svg>
+                  <CircleTrim disable={(this.state.modeButtonCurrentState == 0)} left="-7px"/>
                 </div>
                 <SquareButton disable={(this.state.modeButtonCurrentState == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} type={false}/>
                 <div class="RectangleDisplay" style={{width: "57px"}}>
@@ -243,7 +243,7 @@ advanceOneState = () => {
                 </div>
                 <SquareButton disable={(this.state.modeButtonCurrentState == 0)} highlight={false} icon="expand_less" buttonClickHandler={this.handleSetpointButtonClick} type={true}/>
                 <div class="CircleButton" style={{marginLeft: "-7px"}}>
-                    <svg class="AroundCircleSvg" style={{left: "unset", right: "-7px", transform: "scale(-1,1)"}} viewBox="0 0 3.415 17.462"><path d="M.016 0a12.965 12.965 0 013.4 8.731V0zm3.4 8.731A12.965 12.965 0 010 17.463h3.415z" /></svg>
+                    <CircleTrim disable={(this.state.modeButtonCurrentState == 0)} right="-7px" flip={true}/>
                     <CircularButton disable={(this.state.modeButtonCurrentState == 0)} highlight={false} icon="icon-iconmonstr-time-3-1" text={this.state.timeButtonStates[this.state.timeButtonCurrentState].text}/>
                 </div>
             </div>
