@@ -76,7 +76,7 @@ export class CircularButton extends Component {
     console.log("CircularButton:render():" )
     console.log(this.props)
 
-    var textStyle = ""
+    var textStyle = {}
     if(this.props.bottomPosition && this.props.rightPosition) {
       textStyle = {bottom: `${this.props.bottomPosition}`, right: `${this.props.rightPosition}`}
     }
