@@ -80,6 +80,10 @@ export class CircularButton extends Component {
     if(this.props.bottomPosition && this.props.rightPosition) {
       textStyle = {bottom: `${this.props.bottomPosition}`, right: `${this.props.rightPosition}`}
     }
+    var text = this.props.text;
+    if(this.props.textDisable){
+      text = ""
+    }
 
     return (
         <div class="Circle" style={{backgroundColor: `${this.getColor()}`}} onClick={() => {this.handleButtonClick()}}>
@@ -88,7 +92,7 @@ export class CircularButton extends Component {
             </div>
             <div class="CircleText" style={textStyle}>
                 <div class="CardBodyTextCenteredHighlight">
-                    {this.props.text}
+                    {text}
                 </div>
             </div>
         </div>
