@@ -34,11 +34,11 @@ class WaterLiveCard extends Component {
 
 	if (this.props.liveInfo == null) {
 	    return (
-			<div class="CardBody">
+			<div class="CardBody" style={{height: "300px"}}>
 				<div class="CardItems" style={{width: "75%"}}>
 					<div class="CardItem">
 						<div class="CardBodyTextCentered">
-							No Data...
+							Connecting...
 						</div>
 					</div>
 				</div>
@@ -47,7 +47,7 @@ class WaterLiveCard extends Component {
 	}
 
     return (
-		<div class="CardBody">
+		<div class="CardBody" style={{height: "300px"}}>
 			<div class="CardItems" style={{width: "55%"}}>
 				<div class="CardItem">
 					<div class="CardBodyTextCentered">

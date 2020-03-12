@@ -34,18 +34,15 @@ class AirLiveCard extends Component {
 
   	if (this.props.liveData == null) {
       return (
-  			<div class="CardBody">
+  			<div class="CardBody" style={{height: "300px"}}>
   				<div class="CardItems" style={{width: "93%", marginLeft:"14px"}}>
-            <AirTemperature temperatureData={null}/>
-  					<AirHumidity humidityData={null}/>
-  					<AirVentilation ventilationData={null}/>
   				</div>
   			</div>
       )  
   	}
 
     return (
-  	  <div class="CardBody">
+  	  <div class="CardBody" style={{height: "300px"}}>
         <div class="CardItems" style={{width: "93%", marginLeft:"14px"}}>
           <AirTemperature temperatureData={this.props.liveData.temperatureData}/>
   				<AirHumidity humidityData={this.props.liveData.humidityData}/>
