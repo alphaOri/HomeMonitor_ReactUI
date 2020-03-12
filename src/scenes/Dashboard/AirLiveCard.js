@@ -4,6 +4,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import '../fonts/icomoon/style.css'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import { DisplayValueAndUnits, DisplayValueSeparateUnits } from './DisplayValue.js'
+import { RectangularButton, CircularButton, SquareButton } from './Buttons.js'
 
 class AirLiveCard extends Component {
   constructor(props) {
@@ -24,33 +25,33 @@ class AirLiveCard extends Component {
   		return false
   	}
   	console.log("AirLiveCard:shouldComponentUpdate:return true")
-	return true
+    return true
   }
 
   render() {
   	console.log("AirLiveCard.js:render(): ")
   	console.log(this.props)
 
-	if (this.props.liveData == null) {
-	    return (
-			<div class="CardBody">
-				<div class="CardItems" style={{width: "93%", marginLeft:"14px"}}>
-	                <AirTemperature temperatureData={null}/>
-					<AirHumidity humidityData={null}/>
-					<AirVentilation ventilationData={null}/>
-				</div>
-			</div>
-	    ) 
-	}
+  	if (this.props.liveData == null) {
+      return (
+  			<div class="CardBody">
+  				<div class="CardItems" style={{width: "93%", marginLeft:"14px"}}>
+            <AirTemperature temperatureData={null}/>
+  					<AirHumidity humidityData={null}/>
+  					<AirVentilation ventilationData={null}/>
+  				</div>
+  			</div>
+      )  
+  	}
 
     return (
-		<div class="CardBody">
-            <div class="CardItems" style={{width: "93%", marginLeft:"14px"}}>
-                <AirTemperature temperatureData={this.props.liveData.temperatureData}/>
-				<AirHumidity humidityData={this.props.liveData.humidityData}/>
-				<AirVentilation ventilationData={this.props.liveData.ventilationData}/>
-            </div>
+  	  <div class="CardBody">
+        <div class="CardItems" style={{width: "93%", marginLeft:"14px"}}>
+          <AirTemperature temperatureData={this.props.liveData.temperatureData}/>
+  				<AirHumidity humidityData={this.props.liveData.humidityData}/>
+  				<AirVentilation ventilationData={this.props.liveData.ventilationData}/>
         </div>
+      </div>
     )
   }
 }

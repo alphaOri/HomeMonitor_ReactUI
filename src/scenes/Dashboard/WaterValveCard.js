@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import RectangularButton from './RectangularButton'
+import { RectangularButton } from './Buttons.js'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 
 class WaterValveCard extends Component {
