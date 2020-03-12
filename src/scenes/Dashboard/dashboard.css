@@ -265,7 +265,6 @@ button { font-family: inherit }
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	margin-right: -7px;
 }
 
 .Circle {
@@ -293,12 +292,11 @@ button { font-family: inherit }
 	bottom: 10px;
 	right: 19px;
 	text-align: center;
-	background-color: var(--button-color);
+	background-color: inherit;
 }
 
 .AroundCircleSvg {
 	position: relative;
-	left: -7px;
 	height: 66px;
 	fill: var(--button-color);
 }
@@ -320,6 +318,7 @@ button { font-family: inherit }
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	white-space: nowrap;
 }
 
 .DisplayContainer {

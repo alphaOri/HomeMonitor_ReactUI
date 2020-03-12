@@ -8,27 +8,32 @@ import Dashboard from '../Dashboard/dashboard.js'
 class UserData extends Component{
 	constructor(props){
 		super(props)
-
 		this.state = {
-			msg:'',
-			UIBuilderVersion: '',
-			webSocket : '',
-			msgReceived : '',
-			controlMsgReceived : '',
-			msgSent : '',
-			lastMsgReceived : '',
-			lastCtlMsgReceived : '',
-			lastMsgSent : ''
 		}
 
 		uibuilder.onChange('msg', (newVal) => {
-
-			this.setState({
-			  msg: newVal
-			})
+			var newState = updateState(this.state, newVal.payload)
+			this.setState(newState)
 			this.forceUpdate();
 			//console.info("console.info: " + JSON.stringify(newVal))
 		})
+
+		function updateState(state, payload){
+		    for (var key in payload) {
+		        var val = payload[key];
+		        //console.log(key + ": " + val);
+			    if (state.hasOwnProperty(key)) {
+			        if (typeof val === 'object' && val !== null) {
+			            state[key] = updateState(state[key], val);
+			        } else {
+			            state[key] = val;
+			        }
+			    } else {
+			        state[key] = val;
+			    }
+		    }
+		   return state
+		}
 
 
 		/*uibuilder.onChange('msgsReceived',(newVal) =>{
@@ -78,7 +83,7 @@ class UserData extends Component{
 		//console.log("index.js:render(): ")
 		//console.log(this.props)
 		return(
-			<Dashboard payload={this.state.msg.payload} /> 
+			<Dashboard payload={this.state} /> 
 
 			/*<div ref="root"style={{height:"50vh"}}>
 				<div>{'msg: ' + this.state.msg.payload}</div>
@@ -94,10 +99,10 @@ class UserData extends Component{
 
 	}
 
-	componentWillUnmount(){
+	/*componentWillUnmount(){
 		this.state.ui.destructor();
 		this.state.ui=null;
-	}
+	}*/
 
 	shouldComponentUpdate(){
 		//ascomponentisnotlinkedtotheexternaldata,thereisnoneedinupdates
