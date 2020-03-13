@@ -32,6 +32,8 @@ export class RectangularButton extends Component {
   }
 }
 
+//required props:
+//optional props: disable, highlight, icon, text, textDisable, buttonClickHandler, buttonId. bottomPosition, rightPosition
 export class CircularButton extends Component {
   constructor(props) {
     super(props);
@@ -49,13 +51,13 @@ export class CircularButton extends Component {
     return true
   }
 
-  handleButtonClick = () =>{
+  handleButtonClick = (buttonId) =>{
     console.log("CircularButton:handleButtonClick(): ")
     if(this.props.disable !== true){
       clearTimeout(this.buttonBlinkTimer);
       this.setState({ blink: true });
       this.buttonBlinkTimer = setTimeout(() => this.setState({ blink: false }), 250);
-      this.props.buttonClickHandler();
+      this.props.buttonClickHandler(buttonId);
     }
   }
 
@@ -86,7 +88,7 @@ export class CircularButton extends Component {
     }
 
     return (
-        <div class="Circle" style={{backgroundColor: `${this.getColor()}`}} onClick={() => {this.handleButtonClick()}}>
+        <div class="Circle" style={{backgroundColor: `${this.getColor()}`}} onClick={() => {this.handleButtonClick(this.props.buttonId)}}>
             <div class="CircleIcon">
                 <i class={this.props.icon}></i>
             </div>
@@ -153,13 +155,13 @@ export class SquareButton extends Component {
     return true
   }
 
-  handleButtonClick = (type) =>{
+  handleButtonClick = (buttonId) =>{
     console.log("SquareButton:handleButtonClick(): ")
     if(this.props.disable !== true){
       clearTimeout(this.buttonBlinkTimer);
       this.setState({ blink: true });
       this.buttonBlinkTimer = setTimeout(() => this.setState({ blink: false }), 250);
-      this.props.buttonClickHandler(type);
+      this.props.buttonClickHandler(buttonId);
     }
   }
 
@@ -181,7 +183,7 @@ export class SquareButton extends Component {
     console.log(this.props)
 
     return (
-      <div class="RectangleButton" style={{backgroundColor: `${this.getColor()}`}} onClick={() => {this.handleButtonClick(this.props.type)}}>
+      <div class="RectangleButton" style={{backgroundColor: `${this.getColor()}`}} onClick={() => {this.handleButtonClick(this.props.buttonId)}}>
         <i class="material-icons md-42">{this.props.icon}</i>
       </div>
     )

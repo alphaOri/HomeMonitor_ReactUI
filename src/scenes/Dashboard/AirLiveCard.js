@@ -131,13 +131,9 @@ class AirTemperature extends Component {
     var newMode;
     if(!this.state.useStateMode){
       this.setState({ useStateMode: true});
-      if(this.props.temperatureData.mode == (this.state.modeButtonStates.length-1)) {
-        newMode = 0;
-      } else {
-        newMode = this.props.temperatureData.mode + 1;
-      }
+      newMode = (this.props.temperatureData.mode == (this.state.modeButtonStates.length-1)) ? 0 : this.props.temperatureData.mode + 1;
     } else {
-      newMode = this.state.modeButtonCurrentState + 1;
+      newMode = (this.state.modeButtonCurrentState == (this.state.modeButtonStates.length-1)) ? 0 : this.state.modeButtonCurrentState + 1;
     }
     this.setState({ modeButtonCurrentState: newMode });
   }
@@ -148,24 +144,48 @@ class AirTemperature extends Component {
   }
 
   //setpoint button
-  handleSetpointButtonClick = (isIncrease) => {
+  handleSetpointButtonClick = (buttonId) => {
     console.log("AirTemperature:handleSetpointButtonClick(): ")
     //set send timer
     clearTimeout(this.tempSetpointButtonSendTimerID);
     this.tempSetpointButtonSendTimerID = setTimeout(() => this.onSetpointButtonTimeout(), 5000);
     //set blink timer
-    clearInterval(this.tempSetpointValueBlinkIntervalID)
-    this.setState({ setpointValueVisible: true});
-    this.tempSetpointValueBlinkIntervalID = setInterval(() => {this.setState(prevState => ({setpointValueVisible: !prevState.setpointValueVisible}))}, 500);
-    //set setpoiunt
-    var newSetpoint;
-    if(!this.state.useStateSetpoint){
-      this.setState({ useStateSetpoint: true});
-      newSetpoint = isIncrease ? this.props.temperatureData.setpoint+1 : this.props.temperatureData.setpoint-1;
+    //clearInterval(this.tempSetpointValueBlinkIntervalID)
+    //this.setState({ setpointValueVisible: true});
+    //this.tempSetpointValueBlinkIntervalID = setInterval(() => {this.setState(prevState => ({setpointValueVisible: !prevState.setpointValueVisible}))}, 500);
+
+    //buttonId: 0 for decrease, 1 for increase, 2 for time
+    console.log("buttonId=")
+    console.log(buttonId)
+    if(buttonId === 2) {
+      //set setpoint so its up to date for send
+      if(!this.state.useStateSetpoint) {
+        this.setState({ setpoint: this.props.temperatureData.setpoint });
+      }
+      //set time mode
+      var newTimeMode;
+      if(!this.state.useStateTimeMode){
+        this.setState({ useStateTimeMode: true});
+        newTimeMode = (this.props.temperatureData.timeMode == (this.state.timeButtonStates.length-1)) ? 0 : this.props.temperatureData.timeMode + 1;
+      } else {
+        newTimeMode = (this.state.timeButtonCurrentState == (this.state.timeButtonStates.length-1)) ? 0 : this.state.timeButtonCurrentState + 1;
+      }
+      this.setState({ timeButtonCurrentState: newTimeMode });
     } else {
-      newSetpoint = isIncrease ? this.state.setpoint+1 : this.state.setpoint-1;
+      //set timeMode so its up to date for send
+      if(!this.state.useStateTimeMode) {
+        this.setState({ timeButtonCurrentState: this.props.temperatureData.timeMode });
+      }
+      //set setpoint
+      var newSetpoint;
+      if(!this.state.useStateSetpoint){
+        this.setState({ useStateSetpoint: true});
+        newSetpoint = (buttonId === 1) ? this.props.temperatureData.setpoint+1 : this.props.temperatureData.setpoint-1;
+      } else {
+        newSetpoint = (buttonId === 1) ? this.state.setpoint+1 : this.state.setpoint-1;
+      }
+      this.setState({ setpoint: newSetpoint });
     }
-    this.setState({ setpoint: newSetpoint });
   }
 
   onSetpointButtonTimeout = () => {
@@ -173,38 +193,13 @@ class AirTemperature extends Component {
     this.setState({useStateSetpoint: false})
     this.setState({useStateTimeMode: false})
     // disable blink
-    clearInterval(this.tempSetpointValueBlinkIntervalID);
-    this.setState({setpointValueVisible : true});
-  }
-
-  //time mode button
-  handleTimeButtonClick = () => {
-    console.log("AirTemperature:handleTimeButtonClick(): ")
-    //set send timer
-    clearTimeout(this.tempSetpointButtonSendTimerID);
-    this.tempSetpointButtonSendTimerID = setTimeout(() => this.onSetpointButtonTimeout(), 5000);
-    //set blink timer
-    clearInterval(this.tempSetpointValueBlinkIntervalID)
-    this.setState({ setpointValueVisible: true});
-    this.tempSetpointValueBlinkIntervalID = setInterval(() => {this.setState(prevState => ({setpointValueVisible: !prevState.setpointValueVisible}))}, 500);
-    //set time mode
-    var newTimeMode;
-    if(!this.state.useStateTimeMode){
-      this.setState({ useStateTimeMode: true});
-      if(this.props.temperatureData.timeMode == (this.state.timeButtonStates.length-1)) {
-        newTimeMode = 0;
-      } else {
-        newTimeMode = this.props.temperatureData.timeMode + 1;
-      }
-    } else {
-      newTimeMode = this.state.timeButtonCurrentState + 1;
-    }
-    this.setState({ timeButtonCurrentState: newTimeMode });
+    //clearInterval(this.tempSetpointValueBlinkIntervalID);
+    //this.setState({setpointValueVisible : true});
   }
 
   componentWillUnmount() {
     clearTimeout(this.tempModeButtonSendTimerID);
-    clearTimeout(this.tempSetpointButtonSendTimerID);
+    //clearTimeout(this.tempSetpointButtonSendTimerID);
     clearInterval(this.tempSetpointValueBlinkIntervalID);
   }
 
@@ -223,7 +218,7 @@ class AirTemperature extends Component {
               <SquareButton disable={true} icon={this.state.modeButtonStates[0].icon}/>
               <div class="RectangleDisplay" style={{width: "57px"}}>
                   <div class="ValueDisplay">
-                      <DisplayValueAndUnits disable={!this.state.setpointValueVisible} value={null} units={"°"}/>
+                      <DisplayValueAndUnits value={null} units={"°"}/>
                   </div>
               </div>
               <SquareButton disable={true}/>
@@ -265,16 +260,16 @@ class AirTemperature extends Component {
                   <CircularButton disable={false} highlight={this.props.temperatureData.unitOn} icon={this.state.modeButtonStates[modeState].icon} text={this.state.modeButtonStates[modeState].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="40px" rightPosition="7px"/>
                   <CircleTrim disable={(modeState == 0)} left="-7px"/>
                 </div>
-                <SquareButton disable={(modeState == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} type={false}/>
+                <SquareButton disable={(modeState == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} buttonId={0}/>
                 <div class="RectangleDisplay" style={{width: "57px"}}>
                     <div class="ValueDisplay">
-                        <DisplayValueAndUnits disable={!this.state.setpointValueVisible} value={setpoint} units={"°"}/>
+                        <DisplayValueAndUnits value={setpoint} units={"°"}/>
                     </div>
                 </div>
-                <SquareButton disable={(modeState == 0)} highlight={false} icon="expand_less" buttonClickHandler={this.handleSetpointButtonClick} type={true}/>
+                <SquareButton disable={(modeState == 0)} highlight={false} icon="expand_less" buttonClickHandler={this.handleSetpointButtonClick} buttonId={1}/>
                 <div class="CircleButton" style={{marginLeft: "-7px"}}>
                     <CircleTrim disable={(modeState == 0)} right="-7px" flip={true}/>
-                    <CircularButton disable={(modeState == 0)} highlight={false} icon="icon-iconmonstr-time-3-1" text={this.state.timeButtonStates[timeModeState].text} textDisable={!this.state.setpointValueVisible} buttonClickHandler={this.handleTimeButtonClick}/>
+                    <CircularButton disable={(modeState == 0)} highlight={false} icon="icon-iconmonstr-time-3-1" text={this.state.timeButtonStates[timeModeState].text} buttonClickHandler={this.handleSetpointButtonClick} buttonId={2}/>
                 </div>
             </div>
             <div class="DisplayContainer">
