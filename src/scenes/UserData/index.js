@@ -11,14 +11,22 @@ class UserData extends Component{
 		this.state = {
 		}
 
-		uibuilder.onChange('msg', (newVal) => {
+		/*uibuilder.onChange('msg', (newVal) => {
 			var newState = updateState(this.state, newVal.payload)
 			this.setState(newState)
 			this.forceUpdate();
 			//console.info("console.info: " + JSON.stringify(newVal))
+		})*/
+
+		uibuilder.onChange('msg', (newVal) => {
+
+			this.setState({ 'msg': newVal });
+            this.forceUpdate();
+            
+			//console.info('[uibuilder.onChange] msg received from Node-RED server:', newVal);
 		})
 
-		function updateState(state, payload){
+		/*function updateState(state, payload){
 		    for (var key in payload) {
 		        var val = payload[key];
 		        //console.log(key + ": " + val);
@@ -33,7 +41,7 @@ class UserData extends Component{
 			    }
 		    }
 		   return state
-		}
+		}*/
 
 
 		/*uibuilder.onChange('msgsReceived',(newVal) =>{
@@ -83,7 +91,7 @@ class UserData extends Component{
 		//console.log("index.js:render(): ")
 		//console.log(this.props)
 		return(
-			<Dashboard payload={this.state} /> 
+			<Dashboard payload={this.state.msg} /> 
 
 			/*<div ref="root"style={{height:"50vh"}}>
 				<div>{'msg: ' + this.state.msg.payload}</div>
