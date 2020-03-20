@@ -12,22 +12,18 @@ class HomeWaterCard extends Component {
     }
   }
 
-  componentDidMount() {
-  	//console.log("HomeWaterCard - componentDidMount()")
-  }
-
   shouldComponentUpdate(nextProps){
   	if(nextProps.water == null){
-  		//console.log("HomeWaterCard:shouldComponentUpdate:return false")
+  		console.log("HomeWaterCard:shouldComponentUpdate:return false")
   		return false
   	}
-  	//console.log("HomeWaterCard:shouldComponentUpdate:return true")
-	return true
+  	console.log("HomeWaterCard:shouldComponentUpdate:return true")
+    return true
   }
 
   render() {
-  	//console.log("HomeWaterCard.js:render(): ")
-  	//console.log(this.props)
+  	console.log("HomeWaterCard.js:render(): ")
+  	console.log(this.props)
 
 	if (this.props.water == null) {
 	    return (

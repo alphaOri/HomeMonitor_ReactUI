@@ -9,6 +9,7 @@ class UserData extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
+			msg: ""
 		}
 
 		/*uibuilder.onChange('msg', (newVal) => {
@@ -91,7 +92,7 @@ class UserData extends Component{
 		//console.log("index.js:render(): ")
 		//console.log(this.props)
 		return(
-			<Dashboard payload={this.state.msg} /> 
+			<Dashboard payload={this.state.msg.payload} /> 
 
 			/*<div ref="root"style={{height:"50vh"}}>
 				<div>{'msg: ' + this.state.msg.payload}</div>

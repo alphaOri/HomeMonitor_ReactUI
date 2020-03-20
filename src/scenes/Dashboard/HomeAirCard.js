@@ -11,17 +11,13 @@ class HomeAirCard extends Component {
     }
   }
 
-  componentDidMount() {
-  	console.log("HomeAirCard - componentDidMount()")
-  }
-
   shouldComponentUpdate(nextProps){
   	if(nextProps.air == null){
   		console.log("HomeAirCard:shouldComponentUpdate:return false")
   		return false
   	}
   	console.log("HomeAirCard:shouldComponentUpdate:return true")
-	return true
+    return true
   }
 
   render() {

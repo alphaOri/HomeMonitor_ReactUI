@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 
+//required props: text
+//optional props:
 export class RectangularButton extends Component {
   constructor(props) {
     super(props);
@@ -7,20 +9,18 @@ export class RectangularButton extends Component {
     };
   }
 
-  compo
-
   shouldComponentUpdate(nextProps){
   	if(nextProps.text == null){
-  		//console.log("RectangularButton:shouldComponentUpdate:return false")
+  		console.log("RectangularButton:shouldComponentUpdate:return false")
   		return false
   	}
-  	//console.log("RectangularButton:shouldComponentUpdate:return true")
+  	console.log("RectangularButton:shouldComponentUpdate:return true")
 	  return true
   }
 
   render() {
-  	//console.log("RectangularButton:render(): " )
-  	//console.log(this.props)
+  	console.log("RectangularButton:render(): " )
+  	console.log(this.props)
 
   	return (
         <button class="RectangularButton" onClick={() => {this.props.buttonClickHandler(this.props.text)}}>
@@ -32,23 +32,15 @@ export class RectangularButton extends Component {
   }
 }
 
-//required props:
-//optional props: disable, highlight, icon, text, textDisable, buttonClickHandler, buttonId. bottomPosition, rightPosition
-export class CircularButton extends Component {
+//required props: icon
+//optional props: disable, text, buttonId, highlight, textDisable, buttonClickHandler, bottomPosition, rightPosition
+//Notes: parent uses state to keep this component's props valid so we don't need to derive state from props even though this component can change its own state.
+export class CircularButton extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       blink: false
     };
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if((nextProps == null) && (this.state === nextState)){
-      console.log("CircularButton:shouldComponentUpdate:return false")
-      return false
-    }
-    console.log("CircularButton:shouldComponentUpdate:return true")
-    return true
   }
 
   handleButtonClick = (buttonId) =>{
@@ -104,7 +96,8 @@ export class CircularButton extends Component {
 
 //required props:
 //optional props: disable, left, right, flip
-export class CircleTrim extends Component {
+//Notes: props are hardcoded in parent of this component, so props are always valid
+export class CircleTrim extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -112,7 +105,7 @@ export class CircleTrim extends Component {
   }
 
   render() {
-    console.log("CircleButton:render():" )
+    console.log("CircleTrim:render():" )
     console.log(this.props)
 
     var style = {};
@@ -138,21 +131,15 @@ export class CircleTrim extends Component {
   }
 }
 
-export class SquareButton extends Component {
+//required props: icon
+//optional props: disable, highlight, buttonId
+//Notes: props are hardcoded in parent of this component, so props are always valid
+export class SquareButton extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       blink: false
     };
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if((nextProps == null) && (this.state === nextState)){
-      console.log("SquareButton:shouldComponentUpdate:return false")
-      return false
-    }
-    console.log("SquareButton:shouldComponentUpdate:return true")
-    return true
   }
 
   handleButtonClick = (buttonId) =>{

@@ -8,6 +8,7 @@ import HomeAirCard from './HomeAirCard'
 import HeaderClock from './HeaderClock'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 
+//Notes: dashboard is an exception: since its an only child, its props will always be up-to-date
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -28,18 +29,9 @@ class Dashboard extends Component {
   	uibuilder.send({'topic':'dashboard','payload':'initialize'})
   }
 
-  shouldComponentUpdate(nextProps){
-  	if(nextProps.payload == null){
-  		//console.log("dashboard:shouldComponentUpdate:return false")
-  		return false;
-  	}
-  	//console.log("dashboard:shouldComponentUpdate:return true")
-	return true;
-  }
-
   render() {
-  	//console.log("dashboard.js:render():")
-  	//console.log(this.props)
+  	console.log("dashboard.js:render():")
+  	console.log(this.props)
 
 	if (this.props.payload == null) {
 		return (

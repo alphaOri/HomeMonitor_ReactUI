@@ -21,16 +21,16 @@ class WaterLiveCard extends Component {
 
   shouldComponentUpdate(nextProps){
   	if(nextProps.liveInfo == null){
-  		//console.log("WaterLiveCard:shouldComponentUpdate:return false")
+  		console.log("WaterLiveCard:shouldComponentUpdate:return false")
   		return false
   	}
-  	//console.log("WaterLiveCard:shouldComponentUpdate:return true")
+  	console.log("WaterLiveCard:shouldComponentUpdate:return true")
 	return true
   }
 
   render() {
-  	//console.log("WaterLiveCard.js:render(): ")
-  	//console.log(this.props)
+  	console.log("WaterLiveCard.js:render(): ")
+  	console.log(this.props)
 
 	if (this.props.liveInfo == null) {
 	    return (

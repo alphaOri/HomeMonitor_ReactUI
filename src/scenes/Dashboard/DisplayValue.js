@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import './dashboard.css';
 import '../fonts/material-design-icons/iconfont/material-icons.css'
 
+//required props: units
+//optional props: value
 export class DisplayValueSeparateUnits extends Component {
   constructor(props) {
     super(props);
@@ -10,32 +12,23 @@ export class DisplayValueSeparateUnits extends Component {
   }
 
   shouldComponentUpdate(nextProps){
-    if(nextProps.value == null){
-      //console.log("DisplayValueSeparateUnits:shouldComponentUpdate:return false")
+    if(nextProps.value == null || nextProps == this.props){
+      console.log("DisplayValueSeparateUnits:shouldComponentUpdate:return false")
       return false;
     }
-    //console.log("DisplayValueSeparateUnits:shouldComponentUpdate:return true")
+    console.log("DisplayValueSeparateUnits:shouldComponentUpdate:return true")
    return true;
   }
 
   render() {
-    //console.log("DisplayValueSeparateUnits.js:render(): ")
-    //console.log(this.props)
+    console.log("DisplayValueSeparateUnits.js:render(): ")
+    console.log(this.props)
 
-    if(this.props.value === null || this.props.value === undefined){
-      return (
-        <React.Fragment>
-          ---
-          <div class="CardBodyUnits">
-            {' '}{this.props.units}
-          </div>
-        </React.Fragment>
-      ); 
-    }
+    var value = (this.props.value == null) ? '---' : this.props.value;
 
     return (
       <React.Fragment>
-        {this.props.value}
+        {value}
         <div class="CardBodyUnits">
           {' '}{this.props.units}
         </div>
@@ -44,6 +37,8 @@ export class DisplayValueSeparateUnits extends Component {
   }
 }
 
+//required props: disabled, units
+//optional props: value
 export class DisplayValueAndUnits extends Component {
   constructor(props) {
     super(props);
@@ -52,11 +47,13 @@ export class DisplayValueAndUnits extends Component {
   }
 
   shouldComponentUpdate(nextProps){
-    if(nextProps.value == null){
-      //console.log("DisplayValueAndUnits:shouldComponentUpdate:return false")
+    console.log('nextProps: ', nextProps)
+    console.log("this.props: ", this.props)
+    if(nextProps.value == null || nextProps == this.props){
+      console.log("DisplayValueAndUnits:shouldComponentUpdate:return false")
       return false;
     }
-    //console.log("DisplayValueAndUnits:shouldComponentUpdate:return true")
+    console.log("DisplayValueAndUnits:shouldComponentUpdate:return true")
     return true;
   }
 
@@ -65,56 +62,32 @@ export class DisplayValueAndUnits extends Component {
     console.log(this.props)
 
     if(!this.props.disable) {
-      if(this.props.value === null || this.props.value === undefined){
-        return (
-          <React.Fragment>
-            --{this.props.units}
-          </React.Fragment>
-        ); 
-      }
+      var value = (this.props.value == null) ? '--' : this.props.value;
 
       return (
         <React.Fragment>
           {this.props.value}{this.props.units}
         </React.Fragment>
-      );
+      ); 
     }
+
     return (null);
   }
 }
 
-class DisplayColumn extends Component {
+//required props: label, units
+//optional props: value
+//Notes: this is a wrapper and will pass null props down
+class DisplayColumn extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
     };
   }
 
-  shouldComponentUpdate(nextProps){
-    if(nextProps.value == null){
-      //console.log("DisplayColumn:shouldComponentUpdate:return false")
-      return false;
-    }
-    //console.log("DisplayColumn:shouldComponentUpdate:return true")
-    return true;
-  }
-
   render() {
-    //console.log("DisplayColumn.js:render(): ")
-    //console.log(this.props)
-
-    if(this.props.value === null || this.props.value === undefined){
-      return (
-        <div class="DisplayColumn">
-          <div class="CardBodyText">
-              {this.props.label}
-          </div>
-          <div class="ValueDisplay">
-              ---
-          </div>
-        </div>
-      ); 
-    }
+    console.log("DisplayColumn.js:render(): ")
+    console.log(this.props)
 
     return (
       <div class="DisplayColumn">

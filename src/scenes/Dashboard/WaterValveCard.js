@@ -24,16 +24,16 @@ class WaterValveCard extends Component {
 
   shouldComponentUpdate(nextProps){
   	if(nextProps.valve == null){
-  		//console.log("WaterValveCard:shouldComponentUpdate:return false")
+  		console.log("WaterValveCard:shouldComponentUpdate:return false")
   		return false
   	}
-  	//console.log("WaterValveCard:shouldComponentUpdate:return true")
+  	console.log("WaterValveCard:shouldComponentUpdate:return true")
 	return true
   }
 
   render() {
-  	//console.log("WaterValveCard.js:render(): ")
-  	//console.log(this.props)
+  	console.log("WaterValveCard.js:render(): ")
+  	console.log(this.props)
 
 	if (this.props.valve == null) {
 	    return (
