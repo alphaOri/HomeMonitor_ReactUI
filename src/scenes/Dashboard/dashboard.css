@@ -183,11 +183,14 @@ button { font-family: inherit }
 }
 
 .CardBodyTextCenteredHighlight {
+	display: inline;
 	margin-right: auto;
 	font-weight: bold;
 	font-size: 18px;
 	color: var(--card-text-highlight-color);
 	text-transform: uppercase;
+	background-color: inherit;
+    visibility: visible;
 }
 
 .CardBodyTextHighlight {
@@ -288,11 +291,13 @@ button { font-family: inherit }
 
 
 .CircleText {
+	width: 100%;
+    white-space: nowrap;
 	position: absolute;
 	bottom: 10px;
-	right: 19px;
 	text-align: center;
 	background-color: inherit;
+    visibility: hidden;
 }
 
 .AroundCircleSvg {

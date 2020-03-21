@@ -55,31 +55,27 @@ class AirTemperature extends Component {
     super(props)
     this.state = {
       //props
+      mode: 0,
+      setpoint: null,
       temperatureIn: null,
       temperatureOut: null,
       unitOn: null,
+      timeMode: 0,
       //modeButton
-      mode: 0,
       modeButtonStates: [
         { //off
-          mode: "off",
           icon: "icon-iconmonstr-weather-135-blank",
           text: "off",
         },
         { //heating
-          mode: "heat",
           icon: "icon-iconmonstr-weather-136",
           text: null,
         },
         { //cooling
-          mode: "cool",
           icon: "icon-iconmonstr-weather-137",
           text: null
         },
       ],
-      //setpoint buttons
-      setpoint: null,
-      //time button
       timeButtonStates: [
         { 
           icon: "icon-iconmonstr-time-3-1",
@@ -98,7 +94,6 @@ class AirTemperature extends Component {
           text: "hold",
         },
       ],
-      timeMode: 0,
     }
   }
 
@@ -209,7 +204,7 @@ class AirTemperature extends Component {
     <div class="CardItem">
             <div class="CircleRectangleButtons">
                 <div class="CircleButton" style={{marginRight: "-7px"}}>
-                  <CircularButton disable={false} highlight={this.state.unitOn} icon={this.state.modeButtonStates[this.state.mode].icon} text={this.state.modeButtonStates[this.state.mode].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="40px" rightPosition="7px"/>
+                  <CircularButton disable={false} highlight={this.state.unitOn} icon={this.state.modeButtonStates[this.state.mode].icon} text={this.state.modeButtonStates[this.state.mode].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="40px" rightPosition="-20px"/>
                   <CircleTrim disable={(this.state.mode == 0)} left="-7px"/>
                 </div>
                 <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} buttonId={0}/>
@@ -237,6 +232,49 @@ class AirHumidity extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      //props
+      mode: 0,
+      setpoint: null,
+      humidityIn: null,
+      humidityOut: null,
+      unitOn: null,
+      fanMode: 0,
+      fanOn: null,
+      fanTime: null,
+      //modeButton - // 0 is "off", 1 is "humidify", 2 is "dehumidify"
+      modeButtonStates: [
+        { //off
+          icon: "icon-iconmonstr-drop-19-blank",
+          text: "off",
+        },
+        { //humidify
+          icon: "icon-iconmonstr-drop-21",
+          text: null,
+        },
+        { //dehumidify
+          icon: "icon-iconmonstr-drop-19",
+          text: null
+        },
+      ],
+      //fanButton - // 0-"auto", 1-"15", 2-"30", 3-"60", 4-"120", 5-"240", 6-"480"
+      fanButtonStates: [
+        { 
+          icon: "icon-fan",
+          text: "auto",
+        },
+        { 
+          icon: "icon-fan",
+          text: "15 min",
+        },
+        { 
+          icon: "icon-fan",
+          text: "temp",
+        },
+        { 
+          icon: "icon-fan",
+          text: "hold",
+        },
+      ],
     }
   }
 
