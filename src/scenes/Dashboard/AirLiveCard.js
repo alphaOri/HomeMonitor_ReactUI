@@ -13,12 +13,6 @@ class AirLiveCard extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log("AirLiveCard - componentDidMount()")
-    // request historical data
-    uibuilder.send({'topic':'air','payload': {liveData: 'initialize'}})
-  }
-
   shouldComponentUpdate(nextProps){
     if(nextProps.liveData == null){
       console.log("AirLiveCard:shouldComponentUpdate:return false")
@@ -36,6 +30,9 @@ class AirLiveCard extends Component {
       return (
         <div class="CardBody" style={{height: "300px"}}>
           <div class="CardItems" style={{width: "93%", marginLeft:"14px"}}>
+            <AirTemperature temperatureData={null}/>
+            <AirHumidity humidityData={null}/>
+            <AirVentilation ventilationData={null}/>
           </div>
         </div>
       )  
@@ -103,6 +100,11 @@ class AirTemperature extends Component {
       ],
       timeMode: 0,
     }
+  }
+
+  componentDidMount() {
+    //console.log("AirTemperature - componentDidMount()")
+    uibuilder.send({'topic':'air','payload': {temperature: {initialize: true}}})
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -239,7 +241,8 @@ class AirHumidity extends Component {
   }
 
   componentDidMount() {
-    console.log("AirHumidity - componentDidMount()")
+    //console.log("AirHumidity - componentDidMount()")
+    uibuilder.send({'topic':'air','payload': {humidity: {initialize: true}}})
   }
 
   shouldComponentUpdate(nextProps){
@@ -371,7 +374,8 @@ class AirVentilation extends Component {
   }
 
   componentDidMount() {
-    console.log("AirVentilation - componentDidMount()")
+    //console.log("AirVentilation - componentDidMount()")
+    uibuilder.send({'topic':'air','payload': {ventilation: {initialize: true}}})
   }
 
   shouldComponentUpdate(nextProps){
