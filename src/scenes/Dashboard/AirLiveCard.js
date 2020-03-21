@@ -3,8 +3,8 @@ import './dashboard.css'
 import '../fonts/material-design-icons/iconfont/material-icons.css'
 import '../fonts/icomoon/style.css'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
-import { DisplayValueAndUnits, DisplayValueSeparateUnits } from './DisplayValue.js'
-import { RectangularButton, CircularButton, CircleTrim, SquareButton } from './Buttons.js'
+import { DisplayValueAndUnits, DisplayValueSeparateUnits, DisplayColumn } from './DisplayValue.js'
+import { CircularButton, CircleTrim, SquareButton } from './Buttons.js'
 
 class AirLiveCard extends Component {
   constructor(props) {
@@ -82,7 +82,6 @@ class AirTemperature extends Component {
       ],
       //setpoint buttons
       setpoint: null,
-      setpointValueVisible: true,
       //time button
       timeButtonStates: [
         { 
@@ -153,7 +152,7 @@ class AirTemperature extends Component {
     if(buttonId === 2) {
       //set time mode
       var newTimeMode = (this.state.timeMode == (this.state.timeButtonStates.length-1)) ? 0 : this.state.timeMode + 1;
-      this.setState({ timeButtonCurrentState: newTimeMode });
+      this.setState({ timeMode: newTimeMode });
     } else {
       //set setpoint
       var newSetpoint = (buttonId === 1) ? this.state.setpoint+1 : this.state.setpoint-1;
@@ -162,13 +161,13 @@ class AirTemperature extends Component {
   }
 
   onSetpointButtonTimeout = () => {
-    uibuilder.send({'topic':'air','payload': {'temperature': {'setpoint': this.state.setpoint, 'timeMode': this.state.timeButtonCurrentState}}})
+    uibuilder.send({'topic':'air','payload': {'temperature': {'setpoint': this.state.setpoint, 'timeMode': this.state.timeMode}}})
   }
 
   componentWillUnmount() {
     clearTimeout(this.tempModeButtonSendTimerID);
-    //clearTimeout(this.tempSetpointButtonSendTimerID);
-    clearInterval(this.tempSetpointValueBlinkIntervalID);
+    clearTimeout(this.tempSetpointButtonSendTimerID);
+    //clearInterval(this.tempSetpointValueBlinkIntervalID);
   }
 
   render() {
@@ -197,22 +196,8 @@ class AirTemperature extends Component {
               </div>
           </div>
           <div class="DisplayContainer">
-              <div class="DisplayColumn">
-              <div class="CardBodyText">
-                  in
-              </div>
-              <div class="ValueDisplay">
-                  <DisplayValueAndUnits value={null} units={"°"}/>
-              </div>
-          </div>
-          <div class="DisplayColumn">
-              <div class="CardBodyText">
-                  out
-              </div>
-              <div class="ValueDisplay">
-                  <DisplayValueAndUnits value={null} units={"°"}/>
-              </div>
-          </div>
+              <DisplayColumn label={"in"} value={null} units={"°"} />
+              <DisplayColumn label={"out"} value={null} units={"°"} />
           </div>
         </div>
       )
@@ -238,22 +223,8 @@ class AirTemperature extends Component {
                 </div>
             </div>
             <div class="DisplayContainer">
-                <div class="DisplayColumn">
-                <div class="CardBodyText">
-                    in
-                </div>
-                <div class="ValueDisplay">
-                    <DisplayValueAndUnits value={this.state.temperatureIn} units={"°"}/>
-                </div>
-            </div>
-            <div class="DisplayColumn">
-                <div class="CardBodyText">
-                    out
-                </div>
-                <div class="ValueDisplay">
-                    <DisplayValueAndUnits value={this.state.temperatureOut} units={"°"}/>
-                </div>
-            </div>
+              <DisplayColumn label={"in"} value={this.state.temperatureIn} units={"°"} />
+              <DisplayColumn label={"out"} value={this.state.temperatureOut} units={"°"} />
             </div>
         </div>
     )

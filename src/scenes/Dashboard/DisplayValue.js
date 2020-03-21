@@ -12,7 +12,7 @@ export class DisplayValueSeparateUnits extends Component {
   }
 
   shouldComponentUpdate(nextProps){
-    if(nextProps.value == null || nextProps == this.props){
+    if(nextProps.value == null || (nextProps.value == this.props.value)){
       console.log("DisplayValueSeparateUnits:shouldComponentUpdate:return false")
       return false;
     }
@@ -47,9 +47,7 @@ export class DisplayValueAndUnits extends Component {
   }
 
   shouldComponentUpdate(nextProps){
-    console.log('nextProps: ', nextProps)
-    console.log("this.props: ", this.props)
-    if(nextProps.value == null || nextProps == this.props){
+    if((nextProps.value == null) || (nextProps.value == this.props.value)){
       console.log("DisplayValueAndUnits:shouldComponentUpdate:return false")
       return false;
     }
@@ -78,7 +76,7 @@ export class DisplayValueAndUnits extends Component {
 //required props: label, units
 //optional props: value
 //Notes: this is a wrapper and will pass null props down
-class DisplayColumn extends PureComponent {
+export class DisplayColumn extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
