@@ -132,7 +132,7 @@ export class CircleTrim extends PureComponent {
 }
 
 //required props: icon
-//optional props: disable, highlight, buttonId
+//optional props: disable, highlight, buttonId, corners
 //Notes: props are hardcoded in parent of this component, so props are always valid
 export class SquareButton extends PureComponent {
   constructor(props) {
@@ -169,8 +169,14 @@ export class SquareButton extends PureComponent {
     console.log("SquareButton:render():" )
     console.log(this.props)
 
+    var style = {};
+    style.backgroundColor = this.getColor();
+    if(this.props.corners) {
+      style.borderRadius = this.props.corners;
+    }
+
     return (
-      <div class="RectangleButton" style={{backgroundColor: `${this.getColor()}`}} onClick={() => {this.handleButtonClick(this.props.buttonId)}}>
+      <div class="RectangleButton" style={style} onClick={() => {this.handleButtonClick(this.props.buttonId)}}>
         <i class="material-icons md-42">{this.props.icon}</i>
       </div>
     )

@@ -6,6 +6,29 @@ import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import { DisplayValueAndUnits, DisplayValueSeparateUnits, DisplayColumn } from './DisplayValue.js'
 import { CircularButton, CircleTrim, SquareButton } from './Buttons.js'
 
+function samePropsAreInState(state, props){
+  for (var key in props) {
+    var val = props[key];
+    console.log(key + ": " + val);
+    if (state.hasOwnProperty(key) && state[key] !== null) {
+      if (typeof val === 'object' && val !== null) {
+        if(!samePropsAreInState(state[key], val)){
+          return false;
+        }
+      } else {
+        console.log("state[key]: "+ state[key] + " props[key]: " + props[key]);
+        if(state[key] !== props[key]){
+          return false;
+        }
+      }
+    } else {
+      console.log("state[key]: " + state[key]);
+      return false;
+    }
+  }
+  return true;
+}
+
 class AirLiveCard extends Component {
   constructor(props) {
     super(props)
@@ -54,6 +77,8 @@ class AirTemperature extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      //previous props
+      temperatureData: null,
       //props
       mode: 0,
       setpoint: null,
@@ -103,12 +128,12 @@ class AirTemperature extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.temperatureData == null) {
+    if (nextProps.temperatureData == null || samePropsAreInState(prevState, nextProps)) { //test edge case, state is changed, but props are still valid so they override the state change.
       console.log('AirTemperature:getDerivedStateFromProps:return null')
       return null;
     }
     console.log('AirTemperature:getDerivedStateFromProps:return ', nextProps.temperatureData)
-    return nextProps.temperatureData;
+    return {temperatureData: nextProps.temperatureData, ...nextProps.temperatureData};
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -122,7 +147,7 @@ class AirTemperature extends Component {
 
   //mode button
   handleModeButtonClick = () => {
-    console.log("AirTemperature:handleTempButtonClick(): ")
+    console.log("AirTemperature:handleModeButtonClick(): ")
     clearTimeout(this.tempModeButtonSendTimerID);
     this.advanceOneState();
     this.tempModeButtonSendTimerID = setTimeout(() => this.onModeButtonTimeout(), 5000);
@@ -164,7 +189,6 @@ class AirTemperature extends Component {
   componentWillUnmount() {
     clearTimeout(this.tempModeButtonSendTimerID);
     clearTimeout(this.tempSetpointButtonSendTimerID);
-    //clearInterval(this.tempSetpointValueBlinkIntervalID);
   }
 
   render() {
@@ -180,13 +204,13 @@ class AirTemperature extends Component {
                 <CircularButton disable={true} icon={this.state.modeButtonStates[0].icon}/>
                 <CircleTrim disable={true} left="-7px"/>
               </div>
-              <SquareButton disable={true} icon={this.state.modeButtonStates[0].icon}/>
+              <SquareButton disable={true} icon="expand_more"/>
               <div class="RectangleDisplay" style={{width: "57px"}}>
                   <div class="ValueDisplay">
                       <DisplayValueAndUnits value={null} units={"°"}/>
                   </div>
               </div>
-              <SquareButton disable={true} icon={this.state.modeButtonStates[0].icon}/>
+              <SquareButton disable={true} icon="expand_less"/>
               <div class="CircleButton" style={{marginLeft: "-7px"}}>
                 <CircleTrim disable={true} right="-7px" flip={true}/>
                 <CircularButton disable={true} icon={"icon-iconmonstr-time-3-1"}/>
@@ -201,7 +225,7 @@ class AirTemperature extends Component {
     }
 
     return (
-    <div class="CardItem">
+        <div class="CardItem">
             <div class="CircleRectangleButtons">
                 <div class="CircleButton" style={{marginRight: "-7px"}}>
                   <CircularButton disable={false} highlight={this.state.unitOn} icon={this.state.modeButtonStates[this.state.mode].icon} text={this.state.modeButtonStates[this.state.mode].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="40px" rightPosition="-20px"/>
@@ -232,6 +256,8 @@ class AirHumidity extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      //prev props
+      humidityData: null,
       //props
       mode: 0,
       setpoint: null,
@@ -259,20 +285,25 @@ class AirHumidity extends Component {
       //fanButton - // 0-"auto", 1-"15", 2-"30", 3-"60", 4-"120", 5-"240", 6-"480"
       fanButtonStates: [
         { 
-          icon: "icon-fan",
           text: "auto",
         },
         { 
-          icon: "icon-fan",
           text: "15 min",
         },
         { 
-          icon: "icon-fan",
-          text: "temp",
+          text: "30 min",
         },
         { 
-          icon: "icon-fan",
-          text: "hold",
+          text: "1 hr",
+        },
+        { 
+          text: "2 hr",
+        },
+        { 
+          text: "4 hr",
+        },
+        { 
+          text: "8 hr",
         },
       ],
     }
@@ -283,123 +314,135 @@ class AirHumidity extends Component {
     uibuilder.send({'topic':'air','payload': {humidity: {initialize: true}}})
   }
 
-  shouldComponentUpdate(nextProps){
-    if(nextProps.humidityData == null){
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.humidityData == null || samePropsAreInState(prevState, nextProps)) { //test edge case, state is changed, but props are still valid so they override the state change.
+      console.log('AirHumidity:getDerivedStateFromProps:return null')
+      return null;
+    }
+    console.log('AirHumidity:getDerivedStateFromProps:return ', nextProps.humidityData)
+    return {humidityData: nextProps.humidityData, ...nextProps.humidityData};
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if((this.state == nextState)){ //since we derive state from props, this check is sufficient - no need to check props
       console.log("AirHumidity:shouldComponentUpdate:return false")
       return false
     }
     console.log("AirHumidity:shouldComponentUpdate:return true")
-  return true
+    return true
+  }
+
+  //mode button
+  handleModeButtonClick = () => {
+    console.log("AirHumidity:handleModeButtonClick(): ")
+    clearTimeout(this.tempModeButtonSendTimerID);
+    this.advanceOneState();
+    this.tempModeButtonSendTimerID = setTimeout(() => this.onModeButtonTimeout(), 5000);
+  }
+
+  advanceOneState = () => {
+    //set mode
+    var newMode = (this.state.mode == (this.state.modeButtonStates.length-1)) ? 0 : this.state.mode + 1;
+    this.setState({ mode: newMode });
+  }
+
+  onModeButtonTimeout = () => {
+    uibuilder.send({'topic':'air','payload': {'humidity': {'mode': this.state.mode}}})
+  }
+
+  //setpoint button
+  handleSetpointButtonClick = (buttonId) => {
+    console.log("AirHumidity:handleSetpointButtonClick(): ")
+    //set send timer
+    clearTimeout(this.tempSetpointButtonSendTimerID);
+    this.tempSetpointButtonSendTimerID = setTimeout(() => this.onSetpointButtonTimeout(), 5000);
+
+    //buttonId: 0 for decrease, 1 for increase
+    //set setpoint
+    var newSetpoint = (buttonId === 1) ? this.state.setpoint+1 : this.state.setpoint-1;
+    this.setState({ setpoint: newSetpoint });
+  }
+
+  onSetpointButtonTimeout = () => {
+    uibuilder.send({'topic':'air','payload': {'humidity': {'setpoint': this.state.setpoint}}})
+  }
+
+  //fan button
+  handleFanButtonClick = () => {
+    console.log("AirHumidity:handleFanButtonClick(): ")
+    //set send timer
+    clearTimeout(this.tempFanButtonSendTimerID);
+    this.tempFanButtonSendTimerID = setTimeout(() => this.onFanButtonTimeout(), 5000);
+    
+    //set fan mode
+    var newFanMode = (this.state.fanMode == (this.state.fanButtonStates.length-1)) ? 0 : this.state.fanMode + 1;
+    this.setState({ fanMode: newFanMode });
+  }
+
+  onFanButtonTimeout = () => {
+    uibuilder.send({'topic':'air','payload': {'humidity': {'fanMode': this.state.fanMode}}})
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.tempModeButtonSendTimerID);
+    clearTimeout(this.tempSetpointButtonSendTimerID);
+    clearTimeout(this.tempFanButtonSendTimerID);
   }
 
   render() {
     console.log("AirHumidity:render(): ")
     console.log(this.props)
 
-  if (this.props.humidityData == null) {
+    if (this.state.setpoint == null) {
       return (
           <div class="CardItem">
               <div class="CircleRectangleButtons">
                   <div class="CircleButton" style={{marginRight: "-7px"}}>
-                      <div class="Circle" style={{backgroundColor: "var(--button-highlight-color)"}}>
-                          <div class="CircleIcon">
-                              <i class="icon-iconmonstr-drop-21"></i>
-                          </div>
-                      </div>
-                      <svg class="AroundCircleSvg" style={{left: "-7px"}} viewBox="0 0 3.415 17.462"><path d="M.016 0a12.965 12.965 0 013.4 8.731V0zm3.4 8.731A12.965 12.965 0 010 17.463h3.415z"/></svg>
+                      <CircularButton disable={true} icon={this.state.modeButtonStates[0].icon}/>
+                      <CircleTrim disable={true} left="-7px"/>
                   </div>
-                  <div class="RectangleButton"><i class="material-icons md-42">expand_more</i></div>
+                  <SquareButton disable={true} icon="expand_more"/>
                   <div class="RectangleDisplay" style={{width: "57px"}}>
                       <div class="ValueDisplay">
-                          45%
+                          <DisplayValueAndUnits value={null} units={"%"}/>
                       </div>
                   </div>
-                  <div class="RectangleButton" style={{borderRadius: "0 4px 4px 0"}}><i class="material-icons md-42">expand_less</i></div>
+                  <SquareButton disable={true} icon="expand_less" corners="0 4px 4px 0"/>
                   <div class="CircleButton" style={{marginLeft:"6px"}}>
-                      <div class="Circle">
-                          <div class="CircleIcon">
-                              <i class="icon-fan"></i>
-                          </div>
-                          <div class="CircleText">
-                              <div class="CardBodyTextCenteredHighlight">
-                                  auto
-                              </div>
-                          </div>
-                      </div>
+                      <CircularButton disable={true} icon="icon-fan"/>
                   </div>
               </div>
               <div class="DisplayContainer">
-                  <div class="DisplayColumn">
-                  <div class="CardBodyText">
-                      in
-                  </div>
-                  <div class="ValueDisplay">
-                      <DisplayValueAndUnits value={null} units={"%"}/>
-                  </div>
-              </div>
-              <div class="DisplayColumn">
-                  <div class="CardBodyText">
-                      out
-                  </div>
-                  <div class="ValueDisplay">
-                      <DisplayValueAndUnits value={null} units={"%"}/>
-                  </div>
-              </div>
+                <DisplayColumn label={"in"} value={null} units={"%"} />
+                <DisplayColumn label={"out"} value={null} units={"%"} />
               </div>
           </div>
       ) 
-  }
+    }
 
     return (
-        <div class="CardItem">
-            <div class="CircleRectangleButtons">
-                <div class="CircleButton" style={{marginRight: "-7px"}}>
-                    <div class="Circle" style={{backgroundColor: "var(--button-highlight-color)"}}>
-                        <div class="CircleIcon">
-                            <i class="icon-iconmonstr-drop-21"></i>
-                        </div>
-                    </div>
-                    <svg class="AroundCircleSvg" style={{left: "-7px"}} viewBox="0 0 3.415 17.462"><path d="M.016 0a12.965 12.965 0 013.4 8.731V0zm3.4 8.731A12.965 12.965 0 010 17.463h3.415z"/></svg>
-                </div>
-                <div class="RectangleButton"><i class="material-icons md-42">expand_more</i></div>
-                <div class="RectangleDisplay" style={{width: "57px"}}>
-                    <div class="ValueDisplay">
-                        45%
-                    </div>
-                </div>
-                <div class="RectangleButton" style={{borderRadius: "0 4px 4px 0"}}><i class="material-icons md-42">expand_less</i></div>
-                <div class="CircleButton" style={{marginLeft:"6px"}}>
-                    <div class="Circle">
-                        <div class="CircleIcon">
-                            <i class="icon-fan"></i>
-                        </div>
-                        <div class="CircleText">
-                            <div class="CardBodyTextCenteredHighlight">
-                                auto
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="DisplayContainer">
-                <div class="DisplayColumn">
-                <div class="CardBodyText">
-                    in
-                </div>
-                <div class="ValueDisplay">
-                    <DisplayValueAndUnits value={this.props.humidityData.humidityIn} units={"%"}/>
-                </div>
-            </div>
-            <div class="DisplayColumn">
-                <div class="CardBodyText">
-                    out
-                </div>
-                <div class="ValueDisplay">
-                    <DisplayValueAndUnits value={this.props.humidityData.humidityOut} units={"%"}/>
-                </div>
-            </div>
-            </div>
-        </div>
+          <div class="CardItem">
+              <div class="CircleRectangleButtons">
+                  <div class="CircleButton" style={{marginRight: "-7px"}}>
+                      <CircularButton disable={false} highlight={this.state.unitOn} icon={this.state.modeButtonStates[this.state.mode].icon} text={this.state.modeButtonStates[this.state.mode].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="24px" rightPosition="-18px"/>
+                      <CircleTrim disable={(this.state.mode == 0)} left="-7px"/>
+                  </div>
+                  <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} buttonId={0}/>
+                  <div class="RectangleDisplay" style={{width: "57px"}}>
+                      <div class="ValueDisplay">
+                          <DisplayValueAndUnits value={this.state.setpoint} units={"%"}/>
+                      </div>
+                  </div>
+                  <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_less" buttonClickHandler={this.handleSetpointButtonClick} buttonId={1} corners="0 4px 4px 0"/>
+                  <div class="CircleButton" style={{marginLeft:"6px"}}>
+                      <CircularButton disable={false} highlight={this.state.fanOn} icon="icon-fan" text={this.state.fanButtonStates[this.state.fanMode].text} buttonClickHandler={this.handleFanButtonClick}/>
+                  </div>
+              </div>
+              <div class="DisplayContainer">
+                <DisplayColumn label={"in"} value={this.state.humidityIn} units={"%"} />
+                <DisplayColumn label={"out"} value={this.state.humidityOut} units={"%"} />
+              </div>
+          </div>
     )
   }
 }
