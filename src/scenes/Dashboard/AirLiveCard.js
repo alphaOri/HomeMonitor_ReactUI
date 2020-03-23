@@ -177,7 +177,7 @@ class AirTemperature extends Component {
       this.setState({ timeMode: newTimeMode });
     } else {
       //set setpoint
-      var newSetpoint = (buttonId === 1) ? this.state.setpoint+1 : this.state.setpoint-1;
+      var newSetpoint = Math.min(Math.max(((buttonId === 1) ? this.state.setpoint+1 : this.state.setpoint-1), 40), 90);
       this.setState({ setpoint: newSetpoint });
     }
   }
@@ -360,7 +360,7 @@ class AirHumidity extends Component {
 
     //buttonId: 0 for decrease, 1 for increase
     //set setpoint
-    var newSetpoint = (buttonId === 1) ? this.state.setpoint+1 : this.state.setpoint-1;
+    var newSetpoint = Math.min(Math.max(((buttonId === 1) ? this.state.setpoint+5 : this.state.setpoint-5), 25), 75); //between 30 and 70
     this.setState({ setpoint: newSetpoint });
   }
 
@@ -547,7 +547,7 @@ class AirVentilation extends Component {
 
     //buttonId: 0 for decrease, 1 for increase
     //set setpoint
-    var newSetpoint = (buttonId === 1) ? this.state.setpoint+50 : this.state.setpoint-50;
+    var newSetpoint = Math.min(Math.max(((buttonId === 1) ? this.state.setpoint+50 : this.state.setpoint-50), 300), 1500);;
     this.setState({ setpoint: newSetpoint });
   }
 
