@@ -74,7 +74,7 @@ export class DisplayValueAndUnits extends Component {
 }
 
 //required props: label, units
-//optional props: value
+//optional props: value, separateUnits
 //Notes: this is a wrapper and will pass null props down
 export class DisplayColumn extends PureComponent {
   constructor(props) {
@@ -86,6 +86,19 @@ export class DisplayColumn extends PureComponent {
   render() {
     console.log("DisplayColumn.js:render(): ")
     console.log(this.props)
+
+    if(this.props.separateUnits){
+      return (
+        <div class="DisplayColumn">
+            <div class="CardBodyText">
+                {this.props.label}
+            </div>
+            <div class="ValueDisplay">
+                <DisplayValueSeparateUnits value={this.props.value} units={this.props.units}/>
+            </div>
+        </div>
+      );
+    }
 
     return (
       <div class="DisplayColumn">
