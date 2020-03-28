@@ -174,11 +174,11 @@ class AirTemperature extends Component {
     if(buttonId === 2) {
       //set time mode
       var newTimeMode = (this.state.timeMode == (this.state.timeButtonStates.length-1)) ? 0 : this.state.timeMode + 1;
-      this.setState({ timeMode: newTimeMode });
+      this.setState({ timeMode: newTimeMode});
     } else {
       //set setpoint
       var newSetpoint = Math.min(Math.max(((buttonId === 1) ? this.state.setpoint+1 : this.state.setpoint-1), 40), 90);
-      this.setState({ setpoint: newSetpoint });
+      this.setState({ setpoint: newSetpoint, timeMode: 1}); // if setpoint is changed, time mode defaults to "once"
     }
   }
 
@@ -266,7 +266,6 @@ class AirHumidity extends Component {
       unitOn: null,
       fanMode: 0,
       fanOn: null,
-      fanTime: null,
       fanText: null,
       //modeButton - // 0 is "off", 1 is "humidify", 2 is "dehumidify"
       modeButtonStates: [
@@ -377,6 +376,7 @@ class AirHumidity extends Component {
     //set mode
     var newFanMode;
     if(this.state.fanText !== this.state.fanButtonStates[this.state.fanMode].text){ //if timer countdown has started from server, then go to mode=0 "auto"
+      uibuilder.send({'topic':'air','payload': {'humidity': {'fanMode': "stop timer"}}})
       newFanMode = 0;
     } else {
       newFanMode = (this.state.fanMode == (this.state.fanButtonStates.length-1)) ? 0 : this.state.fanMode + 1;
