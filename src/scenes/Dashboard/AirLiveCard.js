@@ -274,11 +274,11 @@ class AirHumidity extends Component {
           text: "off",
         },
         { //humidify
-          icon: "icon-iconmonstr-drop-21",
+          icon: "icon-iconmonstr-drop-19",
           text: null,
         },
         { //dehumidify
-          icon: "icon-iconmonstr-drop-19",
+          icon: "icon-iconmonstr-drop-21",
           text: null
         },
       ],
