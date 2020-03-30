@@ -60,7 +60,9 @@ export class CircularButton extends PureComponent {
   getColor = () => {
     if(this.props.disable == true){
       return "var(--text-background-highlight-dark)";
-    } else if((this.state.blink == true)||(this.props.highlight == true)) {
+    } else if(this.state.blink == true) {
+      return "var(--button-click-color)";
+    } else if(this.props.highlight == true) {
       return "var(--button-highlight-color)";
     }
     return "var(--button-color)";
@@ -159,7 +161,9 @@ export class SquareButton extends PureComponent {
   getColor = () => {
     if(this.props.disable == true){
       return "var(--text-background-highlight-dark)";
-    } else if((this.state.blink == true)||(this.props.highlight == true)) {
+    } else if(this.state.blink == true) {
+      return "var(--button-click-color)";
+    } else if(this.props.highlight == true) {
       return "var(--button-highlight-color)";
     }
     return "var(--button-color)";
