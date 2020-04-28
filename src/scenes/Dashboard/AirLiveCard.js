@@ -124,7 +124,7 @@ class AirTemperature extends Component {
 
   componentDidMount() {
     //console.log("AirTemperature - componentDidMount()")
-    uibuilder.send({'topic':'air','payload': {temperature: {initialize: true}}})
+    uibuilder.send({'topic':'air','payload': {temperature: {initialize: "liveData"}}})
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -228,7 +228,7 @@ class AirTemperature extends Component {
         <div class="CardItem">
             <div class="CircleRectangleButtons">
                 <div class="CircleButton" style={{marginRight: "-7px"}}>
-                  <CircularButton disable={false} highlight={this.state.unitOn} icon={this.state.modeButtonStates[this.state.mode].icon} text={this.state.modeButtonStates[this.state.mode].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="40px" rightPosition="-20px"/>
+                  <CircularButton disable={false} highlight={this.state.unitOn} icon={this.state.modeButtonStates[this.state.mode].icon} text={this.state.modeButtonStates[this.state.mode].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="42px" rightPosition="-11px"/>
                   <CircleTrim disable={(this.state.mode == 0)} left="-7px"/>
                 </div>
                 <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} buttonId={0}/>
@@ -311,7 +311,7 @@ class AirHumidity extends Component {
 
   componentDidMount() {
     //console.log("AirHumidity - componentDidMount()")
-    uibuilder.send({'topic':'air','payload': {humidity: {initialize: true}}})
+    uibuilder.send({'topic':'air','payload': {humidity: {initialize: "liveData"}}})
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -432,7 +432,7 @@ class AirHumidity extends Component {
           <div class="CardItem">
               <div class="CircleRectangleButtons">
                   <div class="CircleButton" style={{marginRight: "-7px"}}>
-                      <CircularButton disable={false} highlight={this.state.unitOn} icon={this.state.modeButtonStates[this.state.mode].icon} text={this.state.modeButtonStates[this.state.mode].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="24px" rightPosition="-18px"/>
+                      <CircularButton disable={false} highlight={this.state.unitOn} icon={this.state.modeButtonStates[this.state.mode].icon} text={this.state.modeButtonStates[this.state.mode].text} buttonClickHandler={this.handleModeButtonClick} bottomPosition="25px" rightPosition="-11px"/>
                       <CircleTrim disable={(this.state.mode == 0)} left="-7px"/>
                   </div>
                   <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} buttonId={0}/>
@@ -476,10 +476,7 @@ class AirVentilation extends Component {
           text: "auto",
         },
         { 
-          text: "15 min",
-        },
-        { 
-          text: "30 min",
+          text: "20 min",
         },
         { 
           text: "1 hr",
@@ -490,13 +487,25 @@ class AirVentilation extends Component {
         { 
           text: "4 hr",
         },
+        { 
+          text: "on",
+        },
+        { 
+          text: "off 1h",
+        },
+        { 
+          text: "off 2h",
+        },
+        { 
+          text: "off 4h",
+        },
       ],
     }
   }
 
   componentDidMount() {
     //console.log("AirVentilation - componentDidMount()")
-    uibuilder.send({'topic':'air','payload': {ventilation: {initialize: true}}})
+    uibuilder.send({'topic':'air','payload': {ventilation: {initialize: "liveData"}}})
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -524,6 +533,7 @@ class AirVentilation extends Component {
     //set mode
     var newMode;
     if(this.state.modeText !== this.state.modeButtonStates[this.state.mode].text){ //if timer countdown has started from server, then go to mode=1 "auto"
+      uibuilder.send({'topic':'air','payload': {'ventilation': {'mode': "stop timer"}}})
       newMode = 1;
     } else {
       newMode = (this.state.mode == (this.state.modeButtonStates.length-1)) ? 0 : this.state.mode + 1;

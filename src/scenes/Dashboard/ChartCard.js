@@ -55,8 +55,8 @@ var chartConfigs = {
       "inheritPlotBorderColor": "1",
       //-----cosmetics-------//
       "paletteColors": "#ffc000",
-      "bgColor": "#363636",
-      "canvasBgColor": "#363636",
+      "bgColor": "#333333",
+      "canvasBgColor": "#333333",
       "baseFont": "Roboto",
       "baseFontColor": "#d3d3d3",
       "baseFontSize": "15",

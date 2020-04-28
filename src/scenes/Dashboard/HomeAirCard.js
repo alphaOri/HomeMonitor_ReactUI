@@ -42,7 +42,4 @@ class HomeAirCard extends Component {
   }
 }
 
-
-
-
 export default HomeAirCard

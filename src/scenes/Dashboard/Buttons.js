@@ -78,7 +78,7 @@ export class CircularButton extends PureComponent {
     }
     var text = this.props.text;
     if(this.props.textDisable){
-      text = ""
+      text = null;
     }
 
     return (
@@ -87,9 +87,7 @@ export class CircularButton extends PureComponent {
                 <i class={this.props.icon}></i>
             </div>
             <div class="CircleText" style={textStyle}>
-                <div class="CardBodyTextCenteredHighlight">
-                    {text}
-                </div>
+                {text && <div class="CardBodyTextCenteredHighlight">{text}</div>}
             </div>
         </div>
       )

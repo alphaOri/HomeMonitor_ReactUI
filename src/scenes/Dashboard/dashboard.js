@@ -4,6 +4,7 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import './roboto-font.css'
 import HomeWaterCard from './HomeWaterCard'
 import WaterFullscreenCard from './WaterFullscreenCard'
+import AirFullscreenCard from './AirFullscreenCard'
 import HomeAirCard from './HomeAirCard'
 import HeaderClock from './HeaderClock'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
@@ -109,7 +110,7 @@ class Dashboard extends Component {
 						<i class="material-icons md-36">settings</i>
 					</div>
 	    		</div>
-	    		{/* <WaterFullscreenCard water={this.props.payload.air}/> */}
+	    			<AirFullscreenCard air={this.props.payload.air}/>
 	    	</div>
 	    )
 	}
