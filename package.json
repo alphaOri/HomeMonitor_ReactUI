@@ -6,7 +6,7 @@
   "homepage": "/react_ui",
   "dependencies": {
     "fusioncharts": "^3.15.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "node-red-contrib-uibuilder": "^1.0.6",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
