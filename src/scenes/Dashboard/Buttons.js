@@ -1,4 +1,6 @@
 import React, { Component, PureComponent } from 'react'
+import './dashboard.css'
+import '../fonts/material-design-icons/iconfont/material-icons.css'
 
 //required props: text
 //optional props:
@@ -19,8 +21,8 @@ export class RectangularButton extends Component {
   }
 
   render() {
-  	console.log("RectangularButton:render(): " )
-  	console.log(this.props)
+  	//console.log("RectangularButton:render(): " )
+  	//console.log(this.props)
 
   	return (
         <button class="RectangularButton" onClick={() => {this.props.buttonClickHandler(this.props.text)}}>
@@ -29,6 +31,36 @@ export class RectangularButton extends Component {
             </div>
         </button> 
   	)
+  }
+}
+
+//required props:
+//optional props:
+export class CheckBox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  shouldComponentUpdate(nextProps){
+    if(nextProps.checked == null){
+      console.log("CheckBox:shouldComponentUpdate:return false")
+      return false
+    }
+    console.log("CheckBox:shouldComponentUpdate:return true")
+    return true
+  }
+
+  render() {
+    //console.log("CheckBox:render(): " )
+    //console.log(this.props)
+
+    return (
+        <div class="CheckBox" onClick={() => {this.props.buttonClickHandler()}}>
+          {this.props.checked && <i class="material-icons md-42">done</i>}
+        </div> 
+    )
   }
 }
 

@@ -394,3 +394,20 @@ button { font-family: inherit }
 	text-transform: uppercase;
 	white-space: nowrap;
 }
+
+/* Google Material UI overrides */
+
+.MuiMenu-paper::-webkit-scrollbar {
+	display: none;
+}
+
+.MuiSvgIcon-root {
+	display: none !important;
+}
+
+.MuiInput-underline::before {
+	display: none;
+}
+.MuiInput-underline::after {
+	display: none;
+}

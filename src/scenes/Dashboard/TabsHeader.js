@@ -8,10 +8,10 @@ function TabsHeader(props) {
 		<div class="TabBar">
 			{props.tabList.map((tab, index) => {
 				backgroundColor = {backgroundColor: props.defaultColor}
-				if(tab === props.currentTab){
+				if(tab === props.currentTab || index === props.currentTabIndex){
 					backgroundColor = {backgroundColor: props.highlightColor}
 				}		    	
-				return <Tab text={tab} style={backgroundColor} tabClickHandler={props.tabClickHandler} />
+				return <Tab text={tab} index={index} style={backgroundColor} tabClickHandler={props.tabClickHandler} />
 		    }
 		    )}
 		</div>
@@ -20,7 +20,7 @@ function TabsHeader(props) {
 
 function Tab(props) {
 	return (
-		<div class="Tab" style={props.style} onClick={() => {props.tabClickHandler(props.text)}}>
+		<div class="Tab" style={props.style} onClick={() => {props.tabClickHandler(props.text, props.index)}}>
 			<div class="CardBodyText">
 				{props.text}
 			</div>

@@ -77,7 +77,7 @@ class AirTemperature extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      //previous props
+      //previous props - store to compare nextProps to, since state can change props below
       temperatureData: null,
       //props
       mode: 0,
@@ -206,9 +206,7 @@ class AirTemperature extends Component {
               </div>
               <SquareButton disable={true} icon="expand_more"/>
               <div class="RectangleDisplay" style={{width: "57px"}}>
-                  <div class="ValueDisplay">
-                      <DisplayValueAndUnits value={null} units={"°"}/>
-                  </div>
+                <DisplayValueAndUnits value={null} units={"°"}/>
               </div>
               <SquareButton disable={true} icon="expand_less"/>
               <div class="CircleButton" style={{marginLeft: "-7px"}}>
@@ -233,9 +231,7 @@ class AirTemperature extends Component {
                 </div>
                 <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} buttonId={0}/>
                 <div class="RectangleDisplay" style={{width: "57px"}}>
-                    <div class="ValueDisplay">
-                        <DisplayValueAndUnits value={this.state.setpoint} units={"°"}/>
-                    </div>
+                    <DisplayValueAndUnits value={this.state.setpoint} units={"°"}/>
                 </div>
                 <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_less" buttonClickHandler={this.handleSetpointButtonClick} buttonId={1}/>
                 <div class="CircleButton" style={{marginLeft: "-7px"}}>
@@ -411,9 +407,7 @@ class AirHumidity extends Component {
                   </div>
                   <SquareButton disable={true} icon="expand_more"/>
                   <div class="RectangleDisplay" style={{width: "57px"}}>
-                      <div class="ValueDisplay">
-                          <DisplayValueAndUnits value={null} units={"%"}/>
-                      </div>
+                      <DisplayValueAndUnits value={null} units={"%"}/>
                   </div>
                   <SquareButton disable={true} icon="expand_less" corners="0 4px 4px 0"/>
                   <div class="CircleButton" style={{marginLeft:"6px"}}>
@@ -437,9 +431,7 @@ class AirHumidity extends Component {
                   </div>
                   <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} buttonId={0}/>
                   <div class="RectangleDisplay" style={{width: "57px"}}>
-                      <div class="ValueDisplay">
-                          <DisplayValueAndUnits value={this.state.setpoint} units={"%"}/>
-                      </div>
+                      <DisplayValueAndUnits value={this.state.setpoint} units={"%"}/>
                   </div>
                   <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_less" buttonClickHandler={this.handleSetpointButtonClick} buttonId={1} corners="0 4px 4px 0"/>
                   <div class="CircleButton" style={{marginLeft:"6px"}}>
@@ -584,9 +576,7 @@ class AirVentilation extends Component {
                   </div>
                   <SquareButton disable={true} icon="expand_more"/>
                   <div class="RectangleDisplay" style={{width: "112px"}}>
-                      <div class="ValueDisplay">
-                          <DisplayValueSeparateUnits value={null} units={"ppm"}/>
-                      </div>
+                      <DisplayValueSeparateUnits value={null} units={"ppm"}/>
                   </div>
                   <SquareButton disable={true} icon="expand_less" corners="0 4px 4px 0"/>
               </div>
@@ -606,9 +596,7 @@ class AirVentilation extends Component {
                   </div>
                   <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_more" buttonClickHandler={this.handleSetpointButtonClick} buttonId={0}/>
                   <div class="RectangleDisplay" style={{width: "112px"}}>
-                      <div class="ValueDisplay">
-                          <DisplayValueSeparateUnits value={this.state.setpoint} units={"ppm"}/>
-                      </div>
+                      <DisplayValueSeparateUnits value={this.state.setpoint} units={"ppm"}/>
                   </div>
                   <SquareButton disable={(this.state.mode == 0)} highlight={false} icon="expand_less" buttonClickHandler={this.handleSetpointButtonClick} buttonId={1} corners="0 4px 4px 0"/>
               </div>

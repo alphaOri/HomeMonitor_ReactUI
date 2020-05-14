@@ -4,6 +4,12 @@ import '../fonts/material-design-icons/iconfont/material-icons.css'
 import CardHeader from './CardHeader'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import TabsHeader from './TabsHeader'
+import { CheckBox } from './Buttons.js'
+import {SimpleSelect} from './Selectors.js'
+
+const tempRange = 40;
+const tempBase = 50;
+const tempValues = Array(tempRange).fill(5);
 
 function samePropsAreInState(state, props){
   for (var key in props) {
@@ -32,7 +38,7 @@ class AirTemperatureSettings extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      //previous props
+      //previous props - store to compare nextProps to, since state can change props below
       temperatureSettings: null,
       //props
       heatingWakeOn: null,
@@ -51,9 +57,9 @@ class AirTemperatureSettings extends Component {
       coolingSleepTime: null,
       coolingLeaveOn: null,
       coolingLeaveSetpoint: null,
-      //
+      //tab stuff
       tabList: ["heating", "cooling"],
-      currentTab: "heating",
+      currentTabIndex: 0,
     }
   }
   
@@ -80,10 +86,10 @@ class AirTemperatureSettings extends Component {
     return true
   }
 
-  handleTabClick = (text) => {
-      //console.log("WaterChartCard - handleTabClick()")
-      this.setState({
-      currentTab: text
+  handleTabClick = (text, index) => {
+    //console.log("WaterChartCard - handleTabClick()")
+    this.setState({
+      currentTabIndex: index
     });
   }
 
@@ -103,15 +109,15 @@ class AirTemperatureSettings extends Component {
   		<div class="CardContainer" style={{height: "378px"}}>
   			<CardHeader title="Temperature"/>
         <div class="TabContainer" style={{height: "300px"}}>
-            <TabsHeader tabList={this.state.tabList} currentTab={this.state.currentTab} tabClickHandler={this.handleTabClick} 
+            <TabsHeader tabList={this.state.tabList} currentTabIndex={this.state.currentTabIndex} tabClickHandler={this.handleTabClick} 
               defaultColor="var(--card-background-color)" highlightColor="var(--card-highlight-color)"/>
             <div class="TabBody">
                 <div class="CardItems" style={{width: "82%"}}>
                     <div class="CardItem">
+                    </div>
+                    <div class="CardItem">
                         <div class="RowGroup">
-                            <div class="CheckBox">
-                                <i class="material-icons md-42">done</i>
-                            </div>
+                            <CheckBox checked={this.state.heatingWakeOn} />
                             <div class="CardBodyText" style={{marginLeft: "28px"}}>
                                  wake
                             </div>
@@ -120,11 +126,12 @@ class AirTemperatureSettings extends Component {
                             <div class="CardBodyText" style={{margin: "8px"}}>
                                  set to
                             </div>
-                            <div class="RectangleButton" style={{borderRadius: "4px"}}>
+                            {/*<div class="RectangleButton" style={{borderRadius: "4px"}}>
                                 <div class="ValueDisplay">
                                     62°
                                 </div>
-                            </div>
+                            </div>*/}
+                            <SimpleSelect disabled={/*!this.state.heatingWakeOn*/false} values={tempValues} currentValueIndex={/*this.state.heatingWakeSepoint-tempBase*/68}/>
                             <div class="CardBodyText" style={{margin: "8px"}}>
                                  at
                             </div>

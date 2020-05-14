@@ -27,18 +27,18 @@ export class DisplayValueSeparateUnits extends Component {
     var value = (this.props.value == null) ? '---' : this.props.value;
 
     return (
-      <React.Fragment>
+      <div class="ValueDisplay">
         {value}
         <div class="CardBodyUnits">
           {' '}{this.props.units}
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
 
-//required props: disabled, units
-//optional props: value
+//required props: units
+//optional props: disabled, value
 export class DisplayValueAndUnits extends Component {
   constructor(props) {
     super(props);
@@ -63,9 +63,9 @@ export class DisplayValueAndUnits extends Component {
       var value = (this.props.value == null) ? '--' : this.props.value;
 
       return (
-        <React.Fragment>
+        <div class="ValueDisplay">
           {this.props.value}{this.props.units}
-        </React.Fragment>
+        </div>
       ); 
     }
 
@@ -93,22 +93,18 @@ export class DisplayColumn extends PureComponent {
             <div class="CardBodyText">
                 {this.props.label}
             </div>
-            <div class="ValueDisplay">
-                <DisplayValueSeparateUnits value={this.props.value} units={this.props.units}/>
+              <DisplayValueSeparateUnits value={this.props.value} units={this.props.units}/>
+        </div>
+      );
+    } else {
+      return (
+        <div class="DisplayColumn">
+            <div class="CardBodyText">
+                {this.props.label}
             </div>
+              <DisplayValueAndUnits value={this.props.value} units={this.props.units}/>
         </div>
       );
     }
-
-    return (
-      <div class="DisplayColumn">
-          <div class="CardBodyText">
-              {this.props.label}
-          </div>
-          <div class="ValueDisplay">
-              <DisplayValueAndUnits value={this.props.value} units={this.props.units}/>
-          </div>
-      </div>
-    );
   }
 }

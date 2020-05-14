@@ -20,11 +20,11 @@ class WaterChartCard extends Component {
     }
   }
 
-  handleTabClick = (text) => {
+  handleTabClick = (text, index) => {
   	//console.log("WaterChartCard - handleTabClick()")
   	this.setState({
-	  currentTab: text
-	});
+      currentTab: text
+  	});
   }
 
   /*handleDisplayTypeClick = (text) => {
