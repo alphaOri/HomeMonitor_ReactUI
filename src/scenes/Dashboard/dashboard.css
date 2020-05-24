@@ -411,3 +411,7 @@ button { font-family: inherit }
 .MuiInput-underline::after {
 	display: none;
 }
+
+.MuiSelect-select.Mui-disabled {
+	background-color: var(--text-background-highlight-dark) !important;
+}

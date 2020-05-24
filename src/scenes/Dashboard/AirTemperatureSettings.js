@@ -7,9 +7,9 @@ import TabsHeader from './TabsHeader'
 import { CheckBox } from './Buttons.js'
 import {SimpleSelect} from './Selectors.js'
 
-const tempRange = 40;
+const tempRange = 41; //to include 90
 const tempBase = 50;
-const tempValues = Array(tempRange).fill(5);
+const tempValues = Array(tempRange).fill(null);
 
 function samePropsAreInState(state, props){
   for (var key in props) {
@@ -41,22 +41,14 @@ class AirTemperatureSettings extends Component {
       //previous props - store to compare nextProps to, since state can change props below
       temperatureSettings: null,
       //props
-      heatingWakeOn: null,
-      heatingWakeSepoint: null,
-      heatingWakeTime: null,
-      heatingSleepOn: null,
-      heatingSleepSetpoint: null,
-      heatingSleepTime: null,
-      heatingLeaveOn: null,
-      heatingLeaveSetpoint: null,
-      coolingWakeOn: null,
-      coolingWakeSetpoint: null,
-      coolingWakeTime: null,
-      coolingSleepOn: null,
-      coolingSleepSetpoint: null,
-      coolingSleepTime: null,
-      coolingLeaveOn: null,
-      coolingLeaveSetpoint: null,
+      wakeOn: null,
+      wakeSetpoint: null,
+      wakeTime: null,
+      sleepOn: null,
+      sleepSetpoint: null,
+      sleepTime: null,
+      leaveOn: null,
+      leaveSetpoint: null,
       //tab stuff
       tabList: ["heating", "cooling"],
       currentTabIndex: 0,
@@ -65,7 +57,7 @@ class AirTemperatureSettings extends Component {
   
   componentDidMount() {
     //console.log("AirTemperatureSettings - componentDidMount()")
-    uibuilder.send({'topic':'air','payload': {temperature: {initialize: "settings"}}})
+    uibuilder.send({'topic':'air','payload': {temperature: {initialize: "settings", mode: this.state.currentTabIndex}}})
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -87,15 +79,23 @@ class AirTemperatureSettings extends Component {
   }
 
   handleTabClick = (text, index) => {
-    //console.log("WaterChartCard - handleTabClick()")
+    //console.log("AirTemperatureSettings - handleTabClick()")
     this.setState({
       currentTabIndex: index
     });
+    uibuilder.send({'topic':'air','payload': {temperature: {initialize: "settings", mode: index}}})
+  }
+
+  handleWakeSetpointSelect = (value, selectorId) => {
+    //console.log("AirTemperatureSettings - handleWakeSetpointSelect(): ")
+    //console.log("value: "+ value + " selectorId: " + selectorId);
+    uibuilder.send({'topic':'air','payload': {temperature: {settings: {wakeSetpoint: value, mode: this.state.currentTabIndex}}}})
   }
 
   render() {
   	console.log("AirTemperatureSettings.js:render(): ")
   	console.log(this.props)
+    console.log(this.state)
 
     if(this.state.temperatureSettings == null){
       return (
@@ -117,7 +117,7 @@ class AirTemperatureSettings extends Component {
                     </div>
                     <div class="CardItem">
                         <div class="RowGroup">
-                            <CheckBox checked={this.state.heatingWakeOn} />
+                            <CheckBox checked={this.state.wakeOn} />
                             <div class="CardBodyText" style={{marginLeft: "28px"}}>
                                  wake
                             </div>
@@ -131,7 +131,8 @@ class AirTemperatureSettings extends Component {
                                     62°
                                 </div>
                             </div>*/}
-                            <SimpleSelect disabled={/*!this.state.heatingWakeOn*/false} values={tempValues} currentValueIndex={/*this.state.heatingWakeSepoint-tempBase*/68}/>
+                            <SimpleSelect key={String(this.state.wakeSetpoint)} disabled={!this.state.wakeOn} values={tempValues} initValue={this.state.wakeSetpoint} offset={tempBase} units={"°"} 
+                                handleSelect={this.handleWakeSetpointSelect} selectorId={this.state.tabList[this.state.currentTabIndex]}/>
                             <div class="CardBodyText" style={{margin: "8px"}}>
                                  at
                             </div>
