@@ -5,11 +5,28 @@ import CardHeader from './CardHeader'
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import TabsHeader from './TabsHeader'
 import { CheckBox } from './Buttons.js'
-import {SimpleSelect} from './Selectors.js'
+import {SimpleSelect, SimpleTimePicker} from './Selectors.js'
 
-const tempRange = 41; //to include 90
-const tempBase = 50;
-const tempValues = Array(tempRange).fill(null);
+const temperatureRange = 41; //to include 90
+const temperatureBase = 50;
+var temperatureValues = Array(temperatureRange);
+for(let i=0; i<temperatureValues.length; i++){
+  temperatureValues[i]=i+temperatureBase;
+}
+
+const humidityRange = 11; //25-75
+const humidityBase = 25;
+var humidityValues = Array(humidityRange);
+for(let i=0; i<temperatureValues.length; i++){
+  humidityValues[i]=(i*5)+temperatureBase;
+}
+
+const co2Range = 25; //300-1500
+const co2Base = 300;
+var co2Values = Array(co2Range);
+for(let i=0; i<temperatureValues.length; i++){
+  co2Values[i]=(i*50)+temperatureBase;
+}
 
 function samePropsAreInState(state, props){
   for (var key in props) {
@@ -86,10 +103,11 @@ class AirTemperatureSettings extends Component {
     uibuilder.send({'topic':'air','payload': {temperature: {initialize: "settings", mode: index}}})
   }
 
-  handleWakeSetpointSelect = (value, selectorId) => {
+  handleButtonClick = (value, buttonId) => {
     //console.log("AirTemperatureSettings - handleWakeSetpointSelect(): ")
     //console.log("value: "+ value + " selectorId: " + selectorId);
-    uibuilder.send({'topic':'air','payload': {temperature: {settings: {wakeSetpoint: value, mode: this.state.currentTabIndex}}}})
+    this.setState({[buttonId]: value});
+    uibuilder.send({'topic':'air','payload': {temperature: {settings: {[buttonId]: value, mode: this.state.currentTabIndex}}}})
   }
 
   render() {
@@ -108,16 +126,14 @@ class AirTemperatureSettings extends Component {
     return (
   		<div class="CardContainer" style={{height: "378px"}}>
   			<CardHeader title="Temperature"/>
-        <div class="TabContainer" style={{height: "300px"}}>
+        <div class="TabContainer">
             <TabsHeader tabList={this.state.tabList} currentTabIndex={this.state.currentTabIndex} tabClickHandler={this.handleTabClick} 
               defaultColor="var(--card-background-color)" highlightColor="var(--card-highlight-color)"/>
-            <div class="TabBody">
+            <div class="TabBody" style={{height: "250px"}}>
                 <div class="CardItems" style={{width: "82%"}}>
                     <div class="CardItem">
-                    </div>
-                    <div class="CardItem">
                         <div class="RowGroup">
-                            <CheckBox checked={this.state.wakeOn} />
+                            <CheckBox checked={this.state.wakeOn} buttonClickHandler={this.handleButtonClick} buttonId="wakeOn"/>
                             <div class="CardBodyText" style={{marginLeft: "28px"}}>
                                  wake
                             </div>
@@ -126,31 +142,18 @@ class AirTemperatureSettings extends Component {
                             <div class="CardBodyText" style={{margin: "8px"}}>
                                  set to
                             </div>
-                            {/*<div class="RectangleButton" style={{borderRadius: "4px"}}>
-                                <div class="ValueDisplay">
-                                    62°
-                                </div>
-                            </div>*/}
-                            <SimpleSelect key={String(this.state.wakeSetpoint)} disabled={!this.state.wakeOn} values={tempValues} initValue={this.state.wakeSetpoint} offset={tempBase} units={"°"} 
-                                handleSelect={this.handleWakeSetpointSelect} selectorId={this.state.tabList[this.state.currentTabIndex]}/>
+                            <SimpleSelect key={String(this.state.temperatureSettings.wakeSetpoint)} disabled={!this.state.wakeOn} values={temperatureValues} initValue={this.state.temperatureSettings.wakeSetpoint} 
+                                offset={temperatureBase} units={"°"} handleSelect={this.handleButtonClick} buttonId="wakeSetpoint"/> {/*we use temperatureSettings in key because it will not be changed unless new props come in*/}
                             <div class="CardBodyText" style={{margin: "8px"}}>
                                  at
                             </div>
-                            <div class="RectangleButton" style={{borderRadius: "4px", width: "110px"}}>
-                                <div class="ValueDisplay">
-                                    12:00
-                                    <div class="CardBodyUnits">
-                                         am
-                                    </div> 
-                                </div>
-                            </div>
+                            <SimpleTimePicker key={String(this.state.temperatureSettings.wakeTime)} disabled={!this.state.wakeOn} initValue={this.state.temperatureSettings.wakeTime}
+                                handleSelect={this.handleButtonClick} buttonId="wakeTime"/>
                         </div>
                     </div>
                     <div class="CardItem">
                         <div class="RowGroup">
-                            <div class="CheckBox">
-                                <i class="material-icons md-42">done</i>
-                            </div>
+                            <CheckBox checked={this.state.sleepOn} buttonClickHandler={this.handleButtonClick} buttonId="sleepOn"/>
                             <div class="CardBodyText" style={{marginLeft: "28px"}}>
                                  sleep
                             </div>
@@ -159,37 +162,23 @@ class AirTemperatureSettings extends Component {
                             <div class="CardBodyText" style={{margin: "8px"}}>
                                  set to
                             </div>
-                            <div class="RectangleButton" style={{borderRadius: "4px"}}>
-                                <div class="ValueDisplay">
-                                    68°
-                                </div>
-                            </div>
+                            <SimpleSelect key={String(this.state.temperatureSettings.sleepSetpoint)} disabled={!this.state.sleepOn} values={temperatureValues} initValue={this.state.temperatureSettings.sleepSetpoint} 
+                                offset={temperatureBase} units={"°"} handleSelect={this.handleButtonClick} buttonId="sleepSetpoint"/> {/*we use temperatureSettings in key because it will not be changed unless new props come in*/}
                             <div class="CardBodyText" style={{margin: "8px"}}>
                                  at
                             </div>
-                            <div class="RectangleButton" style={{borderRadius: "4px", width: "110px"}}>
-                                <div class="ValueDisplay">
-                                    12:30
-                                    <div class="CardBodyUnits">
-                                         pm
-                                    </div> 
-                                </div>
-                            </div>
+                            <SimpleTimePicker key={String(this.state.temperatureSettings.sleepTime)} disabled={!this.state.sleepOn} initValue={this.state.temperatureSettings.sleepTime}
+                                handleSelect={this.handleButtonClick} buttonId="sleepTime"/>
                         </div>
                     </div>
                     <div class="CardItem">
                         <div class="RowGroup">
-                            <div class="CheckBox">
-                                <i class="material-icons md-42">done</i>
-                            </div>
+                            <CheckBox checked={this.state.leaveOn} buttonClickHandler={this.handleButtonClick} buttonId="leaveOn"/>
                             <div class="CardBodyText" style={{margin: "0px 8px 0px 28px"}}>
                                  in leave mode, set to
                             </div>
-                            <div class="RectangleButton" style={{borderRadius: "4px"}}>
-                                <div class="ValueDisplay">
-                                    68°
-                                </div>
-                            </div>
+                            <SimpleSelect key={String(this.state.temperatureSettings.leaveSetpoint)} disabled={!this.state.leaveOn} values={temperatureValues} initValue={this.state.temperatureSettings.leaveSetpoint}
+                              offset={temperatureBase} units={"°"} handleSelect={this.handleButtonClick} buttonId="leaveSetpoint"/>
                         </div>
                     </div>
                 </div>

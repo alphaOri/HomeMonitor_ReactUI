@@ -34,8 +34,8 @@ export class RectangularButton extends Component {
   }
 }
 
-//required props:
-//optional props:
+//required props: checked
+//optional props: buttonId
 export class CheckBox extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +57,7 @@ export class CheckBox extends Component {
     //console.log(this.props)
 
     return (
-        <div class="CheckBox" onClick={() => {this.props.buttonClickHandler()}}>
+        <div class="CheckBox" onClick={() => {this.props.buttonClickHandler(!this.props.checked, this.props.buttonId)}}>
           {this.props.checked && <i class="material-icons md-42">done</i>}
         </div> 
     )

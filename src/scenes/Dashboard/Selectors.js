@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import './dashboard.css'
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+//import { myTheme } from "./ThemeMaterialUI.js"
+//imports for TimePicker
+import DateFnsUtils from "@date-io/date-fns";
+import { MuiPickersUtilsProvider, TimePicker } from "@material-ui/pickers";
+
+//sandbox for these selectors can be found at https://codesandbox.io/s/m-ui-selectpicker-formatting-l8zp3?file=/demo.js:4993-5765
 
 const selectItemHeight = 66;
 const selectMenuHeight = selectItemHeight * 3;
@@ -13,10 +17,7 @@ const selectMenuHeight = selectItemHeight * 3;
 const useSimpleSelectStyles = makeStyles(theme => ({
   formControl: {
     margin: 0,
-    width: 66,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
+    minWidth: 66,
   },
   paper: {
     WebkitMaskImage:
@@ -37,12 +38,15 @@ const useSimpleSelectStyles = makeStyles(theme => ({
     //button appearance
     backgroundColor: "var(--button-color) !important",
     height: 66,
-    padding: "0px !important",
+    padding: "0px 13px !important",
     borderRadius: "4px !important",
     //font stuff
     fontSize: 24,
     fontWeight: 700,
     color: "var(--card-text-highlight-color)",
+  },
+  selectDisabled: {
+    backgroundColor: "var(--text-background-highlight-dark) !important",
   },
   menuItemRoot: {
     height: selectItemHeight,
@@ -77,16 +81,95 @@ export function SimpleSelect(props) {
 
   return (
     <div>
-      <FormControl className={classes.formControl} disabled={props.disabled}>
-        <Select classes={{select: classes.selectMenu}} onChange={event  => {props.handleSelect(event.target.value+props.offset, props.selectorId)}} 
-          MenuProps={{style: {height: selectMenuHeight}, classes: {list: classes.list, paper: classes.paper}}} defaultValue={props.initValue-props.offset} >
-          <MenuItem value="" disabled />
-          {props.values.map((item, index) => (
-            <MenuItem classes={{root: classes.menuItemRoot}} value={index}> {index+props.offset}{props.units} </MenuItem>
-          ))}
-          <MenuItem value="" disabled />
-        </Select>
-      </FormControl>
+        <FormControl classes={{ root: classes.formControl }} disabled={props.disabled}>
+          <Select classes={{select: classes.selectMenu, disabled: classes.selectDisabled}} onChange={event  => {props.handleSelect(event.target.value, props.buttonId)}} 
+            MenuProps={{style: {height: selectMenuHeight}, classes: {list: classes.list, paper: classes.paper}}} defaultValue={props.initValue} disableUnderline>
+            <MenuItem value="" disabled />
+            {props.values.map((item, index) => (
+              <MenuItem classes={{root: classes.menuItemRoot}} value={item}> {item}{props.units} </MenuItem>
+            ))}
+            <MenuItem value="" disabled />
+          </Select>
+        </FormControl>
     </div>
+    
+  );
+}
+
+const pickerStyles = makeStyles(theme => ({
+  formControl: {
+    margin: 0,
+    backgroundColor: "var(--secondary-main)",
+    borderRadius: 4,
+    height: 66,
+    width: 120,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  disabled : {
+    backgroundColor: "var(--secondary-dark)",
+    color: "#FFFFFF"
+  },
+  inputBase: {
+    //appearance
+    borderRadius: 4,
+    height: 66,
+    width: 120,
+    //font stuff
+    fontSize: 24,
+    fontWeight: 700,
+    color: "var(--text-main)"
+  },
+  input: {
+    textAlign: "center",
+    textTransform: "lowercase"
+  },
+  paper: {
+    //backgroundColor: "var(--background-light)",
+  }
+}));
+
+//required props: disabled, values, offset
+//optional props: units, selectorId, initValue
+export function SimpleTimePicker(props) {
+  const classes = pickerStyles();
+  const [date, setDate] = React.useState(props.initValue);
+
+  const handleChange = (date) => {
+    setDate(date);
+    props.handleSelect(date, props.buttonId)
+  };
+
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <TimePicker
+        classes={{
+          root: classes.formControl,
+        }}
+        InputProps={{
+          disableUnderline: true,
+          classes: {
+            root: classes.inputBase,
+            input: classes.input,
+            disabled: classes.disabled
+          }
+        }}
+        DialogProps={{
+          PaperProps: {
+            classes: {
+              root: classes.paper
+            }
+          }
+        }}
+        disabled={props.disabled}
+        variant="dialog"
+        minutesStep={5}
+        margin="normal"
+        value={date}
+        onChange={handleChange}
+      />
+    </MuiPickersUtilsProvider>
+    
   );
 }

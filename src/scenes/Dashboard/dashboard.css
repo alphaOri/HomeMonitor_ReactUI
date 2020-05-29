@@ -6,24 +6,43 @@
 .material-icons.md-48 { font-size: 48px; }
 
 :root {
-	--main-background-color: #272727; /*dark grey*/
-	--card-background-color: #333333; /*medium grey*/
-	--card-highlight-color: #3D3D3D; /*light grey*/
-	--main-card-bar-color: #B40000;
-	--card-bar-color: #B40000;
-	--card-text-highlight-color: white;
-	/*--card-text-highlight-color: #778899;*/
-	--card-text-color: LightGrey;
-	--text-background-highlight: #516D91;
-	--text-background-highlight-dark: #3d516c;
-	--text-background: Grey;
-	--text-background-dark: DimGrey;
-	/*--button-color: #778899;*/ 
-	--button-color: #516d91; /*blue*/
-	--button-click-color: #5c7ba3;
-	--button-highlight-color: #3780de;
-	--button-alt-color: #FF8800;
-	--button-alt-highlight-color: #FFBF00;
+  /*new palette*/
+  /*background*/
+  --background-dark: #272727;
+  --background-main: #333333; /*grey*/
+  --background-light: #3d3d3d;
+  /*primary*/
+  --primary-dark: #7d0000;
+  --primary-main: #b40000; /*red*/
+  --primary-light: #c33333;
+  /*secondary*/
+  --secondary-dark: #3d516c;
+  --secondary-main: #516d91; /*blue*/
+  --secondary-light: #3780de;
+  --secondary-xtra-light: #5c7ba3;
+  /*text*/
+  --text-dark: #d3d3d3;
+  --text-main: #ffffff; /*white*/
+  --text-light: #ffffff;
+  /*old colors*/
+  --main-background-color: var(--background-dark); /*dark grey*/
+  --card-background-color: var(--background-main); /*medium grey*/
+  --card-highlight-color: var(--background-light); /*light grey*/
+  --main-card-bar-color: var(--primary-main);
+  --card-bar-color: var(--primary-main);
+  --card-text-highlight-color: var(--text-main);
+  /*--card-text-highlight-color: #778899;*/
+  --card-text-color: var(--text-dark);
+  --text-background-highlight: var(--secondary-main);
+  --text-background-highlight-dark: var(--secondary-dark);
+  --text-background: Grey;
+  --text-background-dark: DimGrey;
+  /*--button-color: #778899;*/
+  --button-color: var(--secondary-main); /*blue*/
+  --button-click-color: var(--secondary-xtra-light);
+  --button-highlight-color: var(--secondary-light);
+  --button-alt-color: #ff8800;
+  --button-alt-highlight-color: #ffbf00;
 }
 
 body {
@@ -184,7 +203,7 @@ button { font-family: inherit }
 
 .CardItems {
 	width: 93%;
-	margin: 7px;
+	/*margin: 7px;*/
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -398,20 +417,9 @@ button { font-family: inherit }
 /* Google Material UI overrides */
 
 .MuiMenu-paper::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 .MuiSvgIcon-root {
-	display: none !important;
-}
-
-.MuiInput-underline::before {
-	display: none;
-}
-.MuiInput-underline::after {
-	display: none;
-}
-
-.MuiSelect-select.Mui-disabled {
-	background-color: var(--text-background-highlight-dark) !important;
+  display: none !important;
 }
