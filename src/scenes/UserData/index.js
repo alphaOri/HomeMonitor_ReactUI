@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 //import { findDOMNode } from 'react-dom';
 import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 import Dashboard from '../Dashboard/dashboard.js'
+import { myTheme } from "../Dashboard/Themes.js"
+import { ThemeProvider } from "@material-ui/styles";
 
 class UserData extends Component{
 	constructor(props){
@@ -92,7 +94,9 @@ class UserData extends Component{
 		//console.log("index.js:render(): ")
 		//console.log(this.props)
 		return(
-			<Dashboard payload={this.state.msg.payload} /> 
+			<ThemeProvider theme={myTheme}>
+				<Dashboard payload={this.state.msg.payload} /> 
+			</ThemeProvider>
 
 			/*<div ref="root"style={{height:"50vh"}}>
 				<div>{'msg: ' + this.state.msg.payload}</div>

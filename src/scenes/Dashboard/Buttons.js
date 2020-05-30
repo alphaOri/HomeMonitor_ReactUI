@@ -25,7 +25,7 @@ export class RectangularButton extends Component {
   	//console.log(this.props)
 
   	return (
-        <button class="RectangularButton" onClick={() => {this.props.buttonClickHandler(this.props.text)}}>
+        <button class="RectangularButton" style={{width: this.props.width}} onClick={() => {this.props.buttonClickHandler(this.props.text)}}>
             <div class="CardBodyTextCenteredHighlight">
                 {this.props.text}
             </div>

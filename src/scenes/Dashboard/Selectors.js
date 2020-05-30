@@ -4,9 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-//import { myTheme } from "./ThemeMaterialUI.js"
 //imports for TimePicker
-import DateFnsUtils from "@date-io/date-fns";
+import DateFnsUtils from "@date-io/date-fns"; //only works with v1
 import { MuiPickersUtilsProvider, TimePicker } from "@material-ui/pickers";
 
 //sandbox for these selectors can be found at https://codesandbox.io/s/m-ui-selectpicker-formatting-l8zp3?file=/demo.js:4993-5765
@@ -61,7 +60,7 @@ const useSimpleSelectStyles = makeStyles(theme => ({
   }
 }));
 
-//required props: disabled, values, offset
+//required props: disabled, values
 //optional props: units, selectorId, initValue
 export function SimpleSelect(props) {
   const classes = useSimpleSelectStyles();
@@ -72,12 +71,6 @@ export function SimpleSelect(props) {
     props.handleSelect(selectorId, event.target.value)
     //setValue(event.target.value);
   };*/
-
-  //this is working.  However, parent props are still valid after first render so initValue is sent again... but even when its sent, this still works because somehow <Select> class already handles the value as a default value.
-  /*var initValue = null;
-  if(props.initValue) {
-    initValue = props.initValue-props.offset;
-  }*/
 
   return (
     <div>
@@ -102,7 +95,6 @@ const pickerStyles = makeStyles(theme => ({
     backgroundColor: "var(--secondary-main)",
     borderRadius: 4,
     height: 66,
-    width: 120,
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
@@ -115,7 +107,6 @@ const pickerStyles = makeStyles(theme => ({
     //appearance
     borderRadius: 4,
     height: 66,
-    width: 120,
     //font stuff
     fontSize: 24,
     fontWeight: 700,
@@ -131,7 +122,7 @@ const pickerStyles = makeStyles(theme => ({
 }));
 
 //required props: disabled, values, offset
-//optional props: units, selectorId, initValue
+//optional props: units, selectorId, initValue, timeFormat, props.width
 export function SimpleTimePicker(props) {
   const classes = pickerStyles();
   const [date, setDate] = React.useState(props.initValue);
@@ -144,6 +135,7 @@ export function SimpleTimePicker(props) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <TimePicker
+        style={{width: (props.width || 120)}}
         classes={{
           root: classes.formControl,
         }}
@@ -163,8 +155,9 @@ export function SimpleTimePicker(props) {
           }
         }}
         disabled={props.disabled}
+        format={props.timeFormat || "h:mm a"}
         variant="dialog"
-        minutesStep={5}
+        minutesStep={props.minutesStep || 5}
         margin="normal"
         value={date}
         onChange={handleChange}

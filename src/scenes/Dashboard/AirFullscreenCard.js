@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './dashboard.css'
 import '../fonts/material-design-icons/iconfont/material-icons.css'
 import HomeAirCard from './HomeAirCard'
-import AirTemperatureSettings from './AirTemperatureSettings'
+import {AirTemperatureSettings, AirHumiditySettings, AirVentilationSettings} from './AirSettings'
 //import uibuilder from '../../libs/uibuilder/uibuilderfe.js'
 
 class AirFullscreenCard extends Component {
@@ -38,15 +38,19 @@ class AirFullscreenCard extends Component {
 	    	<div class="CardBoardContainer">
 				<HomeAirCard air={undefined}/>
 				<AirTemperatureSettings temperatureSettings={undefined}/>
+        <AirHumiditySettings humiditySettings={undefined}/>
+        <AirVentilationSettings ventilationSettings={undefined}/>
 			</div>
 	    ) 
 	}
 
     return (
     	<div class="CardBoardContainer">
-			<HomeAirCard air={this.props.air}/> {/*this will render the card header unnecessarily but since HomeAirCard has to be called from dashboard and here, there is no good workaround*/}
-			<AirTemperatureSettings temperatureSettings={this.props.air.temperatureSettings}/>
-		</div>
+  			<HomeAirCard air={this.props.air}/> {/*this will render the card header unnecessarily but since HomeAirCard has to be called from dashboard and here, there is no good workaround*/}
+  			<AirTemperatureSettings temperatureSettings={this.props.air.temperatureSettings}/>
+        <AirHumiditySettings humiditySettings={this.props.air.humiditySettings}/>
+        <AirVentilationSettings ventilationSettings={this.props.air.ventilationSettings}/>
+  		</div>
     ) 
   }
 }

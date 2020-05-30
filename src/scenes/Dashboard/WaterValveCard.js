@@ -41,7 +41,7 @@ class WaterValveCard extends Component {
 				<div class="CardItems" style={{width: "55%"}}>
 					<div class="CardItem">
 		                <div class="CardBodyTextCentered">
-		                    water valve is
+		                    Connecting to water valve...
 		                    <span class="CardBodyTextCenteredHighlight"> ...</span>
 		                </div>
 					</div>
@@ -68,7 +68,7 @@ class WaterValveCard extends Component {
 	                    water valve is
 	                    <span class="CardBodyTextCenteredHighlight"> {this.props.valve}</span>
 	                </div>
-					<RectangularButton text={this.state.buttonState} buttonClickHandler={this.handleValveButtonClick}/>
+					<RectangularButton text={this.state.buttonState} width={100} buttonClickHandler={this.handleValveButtonClick}/>
 				</div>
 			</div>
 		</div>
