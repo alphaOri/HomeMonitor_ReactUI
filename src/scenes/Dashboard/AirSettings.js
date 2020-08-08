@@ -75,7 +75,7 @@ export class AirTemperatureSettings extends Component {
   
   componentDidMount() {
     //console.log("AirTemperatureSettings - componentDidMount()")
-    uibuilder.send({'topic':'air','payload': {temperature: {initialize: "settings", mode: this.state.currentTabIndex}}})
+    uibuilder.send({'topic':'air','payload': {temperature: {initialize: "settings", index: this.state.currentTabIndex}}})
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -101,14 +101,14 @@ export class AirTemperatureSettings extends Component {
     this.setState({
       currentTabIndex: index
     });
-    uibuilder.send({'topic':'air','payload': {temperature: {initialize: "settings", mode: index}}})
+    uibuilder.send({'topic':'air','payload': {temperature: {initialize: "settings", index: index}}})
   }
 
   handleButtonClick = (value, buttonId) => {
     //console.log("AirTemperatureSettings - handleButtonClick(): ")
     //console.log("value: "+ value + " buttonId: " + buttonId);
     this.setState({[buttonId]: value});
-    uibuilder.send({'topic':'air','payload': {temperature: {settings: {[buttonId]: value, mode: this.state.currentTabIndex}}}})
+    uibuilder.send({'topic':'air','payload': {temperature: {settings: {[buttonId]: value, index: this.state.currentTabIndex}}}})
   }
 
   render() {
@@ -207,7 +207,7 @@ export class AirHumiditySettings extends Component {
   
   componentDidMount() {
     //console.log("AirHumiditySettings - componentDidMount()")
-    uibuilder.send({'topic':'air','payload': {humidity: {initialize: "settings", mode: this.state.currentTabIndex}}})
+    uibuilder.send({'topic':'air','payload': {humidity: {initialize: "settings", index: this.state.currentTabIndex}}})
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -233,14 +233,14 @@ export class AirHumiditySettings extends Component {
     this.setState({
       currentTabIndex: index
     });
-    uibuilder.send({'topic':'air','payload': {humidity: {initialize: "settings", mode: index}}})
+    uibuilder.send({'topic':'air','payload': {humidity: {initialize: "settings", index: index}}})
   }
 
   handleButtonClick = (value, buttonId) => {
     //console.log("AirHumiditySettings - handleButtonClick(): ")
     //console.log("value: "+ value + " buttonId: " + buttonId);
     this.setState({[buttonId]: value});
-    uibuilder.send({'topic':'air','payload': {humidity: {settings: {[buttonId]: value, mode: this.state.currentTabIndex}}}})
+    uibuilder.send({'topic':'air','payload': {humidity: {settings: {[buttonId]: value, index: this.state.currentTabIndex}}}})
   }
 
   render() {
@@ -293,7 +293,7 @@ export class AirVentilationSettings extends Component {
       offHoursStartTime: null,
       offHoursEndTime: null,
       temperatureAssistOn: null,
-      temperatureAssistSetpoint: null,
+      temperatureAssistLimit: null,
       calibrationDaysAgo: null,
     }
   }
@@ -377,8 +377,8 @@ export class AirVentilationSettings extends Component {
                                limit to temperature setpoint +/-
                           </div>
                         </div>
-                      <SimpleSelect key={String(this.state.ventilationSettings.temperatureAssistSetpoint)} values={ventilationValues} initValue={this.state.ventilationSettings.temperatureAssistSetpoint} 
-                          units={"°"} handleSelect={this.handleButtonClick} buttonId="temperatureAssistSetpoint"/>
+                      <SimpleSelect key={String(this.state.ventilationSettings.temperatureAssistLimit)} values={ventilationValues} initValue={this.state.ventilationSettings.temperatureAssistLimit} 
+                          units={"°"} handleSelect={this.handleButtonClick} buttonId="temperatureAssistLimit"/>
                   </div>
               </div>
               <div class="CardItem">

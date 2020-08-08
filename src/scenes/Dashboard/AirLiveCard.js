@@ -459,7 +459,7 @@ class AirVentilation extends Component {
       co2In: null,
       unitOn: null,
       modeText: null,
-      //modeButton - // 0-"off", 1-"auto", 2-"15", 3-"30", 4-"60", 5-"120", 6-"240"
+      //modeButton - // 0-"off", 1-"auto", 2-"20 min", 3-"1 hr", 4-"2 hr", 5-"4 hr", 6-"on", 7-"off 1h", 8-"off 2h", 9-"off 4h"
       modeButtonStates: [
         { 
           text: "off",
