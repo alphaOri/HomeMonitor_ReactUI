@@ -128,7 +128,7 @@ class AirTemperature extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.temperatureData == null || samePropsAreInState(prevState, nextProps)) { //test edge case, state is changed, but props are still valid so they override the state change.
+    if (nextProps.temperatureData == null || samePropsAreInState(prevState, nextProps)) { //todo: test edge case, state is changed, but props are still valid so they override the state change.
       console.log('AirTemperature:getDerivedStateFromProps:return null')
       return null;
     }
@@ -165,11 +165,7 @@ class AirTemperature extends Component {
 
   //setpoint button
   handleSetpointButtonClick = (buttonId) => {
-    console.log("AirTemperature:handleSetpointButtonClick(): ")
-    //set send timer
-    clearTimeout(this.tempSetpointButtonSendTimerID);
-    this.tempSetpointButtonSendTimerID = setTimeout(() => this.onSetpointButtonTimeout(), 5000);
-
+    //console.log("AirTemperature:handleSetpointButtonClick(): ")
     //buttonId: 0 for decrease, 1 for increase, 2 for time
     if(buttonId === 2) {
       //set time mode
@@ -177,13 +173,25 @@ class AirTemperature extends Component {
       this.setState({ timeMode: newTimeMode});
     } else {
       //set setpoint
+      this.sendSetpoint = true
       var newSetpoint = Math.min(Math.max(((buttonId === 1) ? this.state.setpoint+1 : this.state.setpoint-1), 40), 90);
       this.setState({ setpoint: newSetpoint, timeMode: 1}); // if setpoint is changed, time mode defaults to "once"
     }
+
+    //set send timer
+    clearTimeout(this.tempSetpointButtonSendTimerID);
+    this.tempSetpointButtonSendTimerID = setTimeout(() => this.onSetpointButtonTimeout(), 5000);
   }
 
   onSetpointButtonTimeout = () => {
-    uibuilder.send({'topic':'air','payload': {'temperature': {'setpoint': this.state.setpoint, 'timeMode': this.state.timeMode}}})
+    console.log("sendSetpoint: "+this.sendSetpoint)
+    if(this.sendSetpoint) {
+      //only send setpoint if it has changed.  That way we know to revert to plan setpoint, or change the setpoint.
+      uibuilder.send({'topic':'air','payload': {'temperature': {'setpoint': this.state.setpoint, 'timeMode': this.state.timeMode}}})
+    } else {
+      uibuilder.send({'topic':'air','payload': {'temperature': {'timeMode': this.state.timeMode}}})
+    }
+    this.sendSetpoint = false
   }
 
   componentWillUnmount() {
